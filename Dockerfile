@@ -26,7 +26,7 @@ COPY ./kubernetes kubernetes
 COPY ./deploy.sh deploy.sh
 
 # All args for cloud build come after this.
-#ENTRYPOINT ["./deploy.sh"]
+ENTRYPOINT ["./deploy.sh"]
 
 # CMD should essentially behave as the default test
 # CMD ["args", "for", "deploy"]
