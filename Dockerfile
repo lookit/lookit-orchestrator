@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM gcr.io/google.com/cloudsdktool/cloud-sdk
 
 RUN apt-get update && \
     apt-get install -y \
@@ -9,9 +9,6 @@ RUN apt-get update && \
       gcc \
       curl \
       && \
-    # gcloud and friends
-    curl -sSL https://sdk.cloud.google.com | bash && \
-    gcloud -q components install kubectl && \
     # kustomize
     curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash && \
     mv kustomize /usr/local/bin/ && \
