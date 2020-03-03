@@ -1,6 +1,7 @@
 FROM gcr.io/google.com/cloudsdktool/cloud-sdk
 
 RUN apt-get update && \
+    apt-get upgrade && \
     apt-get install -y \
       # System dependencies.
       build-essential \
