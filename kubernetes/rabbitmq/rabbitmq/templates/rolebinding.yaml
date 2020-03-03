@@ -1,0 +1,18 @@
+---
+# Source: rabbitmq/templates/rolebinding.yaml
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: lookit-rabbitmq-endpoint-reader
+  labels:
+    app: rabbitmq
+    chart: rabbitmq-6.15.0
+    release: "lookit-rabbitmq"
+    heritage: "Helm"
+subjects:
+- kind: ServiceAccount
+  name: lookit-rabbitmq
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: lookit-rabbitmq-endpoint-reader

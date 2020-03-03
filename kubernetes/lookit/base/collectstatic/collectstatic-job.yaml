@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: collectstatic
+  annotations:
+    cloud-sql-proxy-sidecar: "injected"
+    lookit-env-vars: "replaced"
+spec:
+  activeDeadlineSeconds: 900
+  backoffLimit: 6
+  completions: 1
+  parallelism: 1
+  # ttlSecondsAfterFinished here?
+  template:
+    metadata:
+      name: collectstatic
+    spec:
+      containers:
+      - command:
+        - python
+        - manage.py
+        - collectstatic
+        - --noinput
+        image: lookit
+        imagePullPolicy: IfNotPresent
+        name: collectstatic
+        volumeMounts:
+        - mountPath: /etc/googleAppCreds.json
+          name: secret-volume
+          readOnly: true
+          subPath: googleAppCreds.json
+      volumes:
+      - name: config-volume
+        configMap:
+          defaultMode: 420
+          name: lookit-configmap
+      - name: secret-volume
+        secret:
+          defaultMode: 420
+          secretName: lookit-secrets

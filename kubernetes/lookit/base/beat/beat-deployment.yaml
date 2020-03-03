@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beat
+  annotations:
+    cloud-sql-proxy-sidecar: "injected"
+    lookit-env-vars: "replaced"
+spec:
+  selector:
+    - matchLabels:
+  template:
+    spec:
+      containers:
+      - command:
+        - gosu
+        - www-data
+        - celery
+        - -A
+        - project.celery.app
+        - beat
+        - -l
+        - DEBUG
+        - --pidfile=
+        image: lookit
+        imagePullPolicy: IfNotPresent
+        name: beat
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        volumeMounts:
+        - mountPath: /etc/googleAppCreds.json
+          name: secret-volume
+          readOnly: true
+          subPath: googleAppCreds.json
+      volumes:
+      - name: config-volume
+        configMap:
+          defaultMode: 420
+          name: lookit-configmap
+      - name: secret-volume
+        secret:
+          defaultMode: 420
+          secretName: lookit-secrets

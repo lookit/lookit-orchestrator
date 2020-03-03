@@ -1,0 +1,5 @@
+resources:
+  - builder-statefulset.yaml
+commonLabels:
+  app.kubernetes.io/name: builder
+  app.kubernetes.io/component: experiment-builder

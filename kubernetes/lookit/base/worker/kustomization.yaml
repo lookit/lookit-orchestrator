@@ -1,0 +1,5 @@
+resources:
+  - worker-deployment.yaml
+commonLabels:
+  app.kubernetes.io/name: worker
+  app.kubernetes.io/component: celery-task-runner

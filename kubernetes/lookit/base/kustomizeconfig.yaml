@@ -1,0 +1,11 @@
+# If it's not here:
+# https://github.com/kubernetes-sigs/kustomize/blob/master/api/konfig/builtinpluginconsts/varreference.go
+# then it needs to be here.
+
+varReference:
+- kind: ConfigMap
+  path: data/CLOUDSQL_INSTANCE_CONNECTION_NAME
+- kind: ConfigMap
+  path: data/SITE_DOMAIN
+- kind: ConfigMap
+  path: data/ENVIRONMENT

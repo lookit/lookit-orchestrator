@@ -1,0 +1,7 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: google-storage
+spec:
+  type: ExternalName
+  externalName: storage.googleapis.com

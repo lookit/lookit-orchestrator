@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: builder
+  annotations:
+    cloud-sql-proxy-sidecar: "injected"
+    lookit-env-vars: "injected"
+spec:
+  selector:
+    - matchLabels:
+  podManagementPolicy: OrderedReady
+  serviceName: builder
+  template:
+    spec:
+      containers:
+      - command:
+        - gosu
+        - www-data
+        - celery
+        - -A
+        - project.celery.app
+        - worker
+        - -c
+        - "2"
+        - -l
+        - INFO
+        - -n
+        - worker.%h
+        - --without-gossip
+        - --maxtasksperchild
+        - "1"
+        - -Q
+        - builds,cleanup
+        env:
+          - name: DOCKER_HOST
+            value: tcp://localhost:2375
+        image: lookit
+        imagePullPolicy: IfNotPresent
+        name: builder
+        resources:
+          limits:
+            cpu: "2"
+            memory: 4Gi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        volumeMounts:
+        - mountPath: /code/ember_build/checkouts
+          name: checkouts-volume
+        - mountPath: /code/ember_build/deployments
+          name: deployments-volume
+        - mountPath: /etc/googleAppCreds.json
+          name: secret-volume
+          readOnly: true
+          subPath: googleAppCreds.json
+      - args:
+          - --storage-driver=overlay
+        image: docker:latest
+        imagePullPolicy: Always
+        name: docker
+        ports:
+          - containerPort: 2375
+            name: docker
+            protocol: TCP
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - mountPath: /var/lib/docker
+            name: docker-volume
+          - mountPath: /code/ember_build/checkouts
+            name: checkouts-volume
+          - mountPath: /code/ember_build/deployments
+            name: deployments-volume
+      volumes:
+      - name: checkouts-volume
+        emptyDir: {}
+      - name: deployments-volume
+        emptyDir: {}
+      - name: config-volume
+        configMap:
+          defaultMode: 420
+          name: lookit-configmap
+      - name: secret-volume
+        secret:
+          defaultMode: 420
+          secretName: lookit-secrets
+  volumeClaimTemplates:
+  - metadata:
+      name: docker-volume
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: ssd
+      volumeMode: Filesystem

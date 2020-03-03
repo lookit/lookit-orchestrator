@@ -1,0 +1,5 @@
+resources:
+  - collectstatic-job.yaml
+commonLabels:
+  app.kubernetes.io/name: collectstatic
+  app.kubernetes.io/component: static-file-collector

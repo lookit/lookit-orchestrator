@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "worker"
+  annotations:
+    cloud-sql-proxy-sidecar: "injected"
+    lookit-env-vars: "replaced"
+spec:
+  selector:
+    - matchLabels:
+  template:
+    spec:
+      containers:
+      - command:
+        - gosu
+        - www-data
+        - celery
+        - -A
+        - project.celery.app
+        - worker
+        - -c
+        - "1"
+        - -l
+        - INFO
+        - -n
+        - worker.%h
+        - --without-gossip
+        - --maxtasksperchild
+        - "5"
+        - -Q
+        - email
+        image: lookit
+        imagePullPolicy: IfNotPresent
+        name: worker
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1Gi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        volumeMounts:
+        - mountPath: /etc/googleAppCreds.json
+          name: secret-volume
+          readOnly: true
+          subPath: googleAppCreds.json
+      volumes:
+      - name: config-volume
+        configMap:
+          defaultMode: 420
+          name: lookit-configmap
+      - name: secret-volume
+        secret:
+          defaultMode: 420
+          secretName: lookit-secrets

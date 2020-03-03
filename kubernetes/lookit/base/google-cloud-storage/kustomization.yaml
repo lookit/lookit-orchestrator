@@ -1,0 +1,5 @@
+resources:
+  - google-storage-external-svc.yaml
+#  - proxy-gcs-ingress.yaml
+commonLabels:
+  app.kubernetes.io/component: cloud-storage-proxy

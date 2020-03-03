@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  annotations:
+    cloud-sql-proxy-sidecar: "injected"
+    lookit-env-vars: "replaced"
+spec:
+  selector:
+    - matchLabels:
+  template:
+    spec:
+      containers:
+      - command:
+        - uwsgi
+        - --ini
+        - /etc/uwsgi/uwsgi.ini
+        - --socket
+        - :5000
+        image: lookit
+        imagePullPolicy: IfNotPresent
+        name: uwsgi
+        ports:
+        - containerPort: 5000
+          name: wsgi
+          protocol: TCP
+        - containerPort: 1717
+          name: stats
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 5000
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        volumeMounts:
+        - mountPath: /etc/uwsgi/uwsgi.ini
+          name: config-volume
+          readOnly: true
+          subPath: uwsgi.ini
+        - mountPath: /etc/googleAppCreds.json
+          name: secret-volume
+          readOnly: true
+          subPath: googleAppCreds.json
+      volumes:
+      - name: static-volume
+        emptyDir: {}
+      - name: config-volume
+        configMap:
+          defaultMode: 420
+          name: lookit-configmap
+      - name: secret-volume
+        secret:
+          defaultMode: 420
+          secretName: lookit-secrets

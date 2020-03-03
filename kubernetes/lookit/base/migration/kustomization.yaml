@@ -1,0 +1,5 @@
+resources:
+  - migration-job.yaml
+commonLabels:
+  app.kubernetes.io/name: migration
+  app.kubernetes.io/component: database-migration-job

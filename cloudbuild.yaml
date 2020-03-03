@@ -1,0 +1,17 @@
+steps:
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/lookit-orchestrator', '.' ]
+
+# --- Invocation would be as below in another cloudbuild.yaml ---
+#- name: 'lookit-orchestrator'
+#  env:
+#    - 'BUILD_ID=$BUILD_ID'
+#    - 'REPO_NAME=$REPO_NAME'
+#    - 'COMMIT_SHA=$COMMIT_SHA'
+#    - 'SHORT_SHA=$SHORT_SHA'
+#    - 'BRANCH_NAME=$BRANCH_NAME'
+#    - 'TAG_NAME=$TAG_NAME'
+
+images:
+- 'gcr.io/$PROJECT_ID/lookit-orchestrator'

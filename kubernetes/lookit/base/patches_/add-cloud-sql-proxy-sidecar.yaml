@@ -1,0 +1,15 @@
+- op: add
+  path: /spec/template/spec/containers/-
+  value:
+    name: cloudsql-proxy
+    image: gcr.io/cloudsql-docker/gce-proxy:1.14
+    command: ["/cloud_sql_proxy",
+              "-instances=$(CLOUDSQL_INSTANCE_CONNECTION_NAME)=tcp:5432",
+              "-credential_file=/secrets/cloudsql/credentials.json"]
+    securityContext:
+      runAsUser: 2  # non-root user
+      allowPrivilegeEscalation: false
+    volumeMounts:
+      - name: cloudsql-instance-credentials
+        mountPath: /secrets/cloudsql
+        readOnly: true

@@ -1,0 +1,5 @@
+resources:
+  - beat-deployment.yaml
+commonLabels:
+  app.kubernetes.io/name: beat
+  app.kubernetes.io/component: celery-task-cron
