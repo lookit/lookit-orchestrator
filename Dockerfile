@@ -24,6 +24,7 @@ RUN apt-get update && \
 
 COPY ./kubernetes kubernetes
 COPY ./deploy.sh deploy.sh
+COPY ./Makefile Makefile
 
 # All args for cloud build come after this.
 ENTRYPOINT ["./deploy.sh"]
