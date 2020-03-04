@@ -63,6 +63,4 @@ TARGET_CLUSTER="${BRANCH_CLUSTERS_MAP[$BRANCH_NAME]}"
 printf "\ntarget cluster for deployment: %s" "$TARGET_CLUSTER"
 
 gcloud container clusters get-credentials "$TARGET_CLUSTER" --zone=us-east1-d
-
-
-
+kubectl apply -f "$MANIFESTS_TARGET"
