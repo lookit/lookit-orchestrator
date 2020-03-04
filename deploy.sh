@@ -62,5 +62,8 @@ declare -A BRANCH_CLUSTERS_MAP=(
 TARGET_CLUSTER="${BRANCH_CLUSTERS_MAP[$BRANCH_NAME]}"
 printf "\ntarget cluster for deployment: %s" "$TARGET_CLUSTER"
 
+printf "Getting current context: "
+kubectl config current-context
+
 
 
