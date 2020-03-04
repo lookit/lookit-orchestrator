@@ -38,23 +38,23 @@ configMapGenerator:
 vars:
   - name: CLOUDSQL_INSTANCE_CONNECTION_NAME
     objref:
+      apiVersion: v1
       kind: ConfigMap
       name: lookit-configmap
-      apiVersion: v1
     fieldref:
       fieldpath: data.CLOUDSQL_INSTANCE_CONNECTION_NAME
   - name: SITE_DOMAIN
     objref:
+      apiVersion: v1
       kind: ConfigMap
       name: lookit-configmap
-      apiVersion: v1
     fieldref:
       fieldpath: data.SITE_DOMAIN
   - name: ENVIRONMENT
     objref:
+      apiVersion: v1
       kind: ConfigMap
       name: lookit-configmap
-      apiVersion: v1
     fieldref:
       fieldpath: data.ENVIRONMENT
 
