@@ -55,8 +55,8 @@ kustomize build -o "$MANIFESTS_TARGET" "${TARGET_KUSTOMIZATIONS}"
 # 6) Deploy to the correct cluster.
 # Branches --> Clusters.
 declare -A BRANCH_CLUSTERS_MAP=(
-    [master]="gke_mit-lookit_us-east1-d_lookit-production"
-    [develop]="gke_mit-lookit_us-east1-d_lookit-staging"
+    [master]="lookit-production"
+    [develop]="lookit-staging"
 )
 
 TARGET_CLUSTER="${BRANCH_CLUSTERS_MAP[$BRANCH_NAME]}"
