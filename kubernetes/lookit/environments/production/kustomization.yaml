@@ -6,3 +6,10 @@ configMapGenerator:
     behavior: merge
     envs:
       - lookit-config.env
+secretGenerator:
+  - name: lookit-secrets
+    behavior: create
+    envs:
+      - lookit-secrets.env
+    files:
+      - googleAppCreds.json
