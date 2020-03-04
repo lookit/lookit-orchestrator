@@ -72,5 +72,5 @@ decrypt-staging:
 clean:
 	rm kubernetes/manifests/*/*.yaml
 
-.PHONY: test-deploy-script test-cloud-build encrypt-staging encrypt-prod decrypt-prod decrypt-staging
+.PHONY: test-deploy-script test-cloud-build encrypt-staging encrypt-prod decrypt-prod decrypt-staging clean
 
