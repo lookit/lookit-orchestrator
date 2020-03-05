@@ -6,6 +6,8 @@ metadata:
     cloud-sql-proxy-sidecar: "injected"
     lookit-env-vars: "replaced"
 spec:
+  selector:
+    matchLabels: {}
   template:
     spec:
       containers:
