@@ -20,6 +20,13 @@ encrypt-prod:
 		--keyring=lookit-keyring \
 		--key=kubernetes-secrets \
 		--project=mit-lookit-keys
+	gcloud kms encrypt \
+		--plaintext-file=kubernetes/lookit/environments/production/cloudsql-client-creds.json \
+		--ciphertext-file=kubernetes/lookit/environments/production/cloudsql-client-creds.json.enc \
+		--location=us-east1 \
+		--keyring=lookit-keyring \
+		--key=kubernetes-secrets \
+		--project=mit-lookit-keys
 
 encrypt-staging:
 	gcloud kms encrypt \
@@ -32,6 +39,13 @@ encrypt-staging:
 	gcloud kms encrypt \
 		--plaintext-file=kubernetes/lookit/environments/staging/googleAppCreds.json \
 		--ciphertext-file=kubernetes/lookit/environments/staging/googleAppCreds.json.enc \
+		--location=us-east1 \
+		--keyring=lookit-keyring \
+		--key=kubernetes-secrets \
+		--project=mit-lookit-keys
+	gcloud kms encrypt \
+		--plaintext-file=kubernetes/lookit/environments/staging/cloudsql-client-creds.json \
+		--ciphertext-file=kubernetes/lookit/environments/staging/cloudsql-client-creds.json.enc \
 		--location=us-east1 \
 		--keyring=lookit-keyring \
 		--key=kubernetes-secrets \
@@ -52,6 +66,13 @@ decrypt-prod:
 		--keyring=lookit-keyring \
 		--key=kubernetes-secrets \
 		--project=mit-lookit-keys
+	gcloud kms decrypt \
+		--ciphertext-file=kubernetes/lookit/environments/production/cloudsql-client-creds.json.enc \
+		--plaintext-file=kubernetes/lookit/environments/production/cloudsql-client-creds.json \
+		--location=us-east1 \
+		--keyring=lookit-keyring \
+		--key=kubernetes-secrets \
+		--project=mit-lookit-keys
 
 decrypt-staging:
 	gcloud kms decrypt \
@@ -64,6 +85,13 @@ decrypt-staging:
 	gcloud kms decrypt \
 		--ciphertext-file=kubernetes/lookit/environments/staging/googleAppCreds.json.enc \
 		--plaintext-file=kubernetes/lookit/environments/staging/googleAppCreds.json \
+		--location=us-east1 \
+		--keyring=lookit-keyring \
+		--key=kubernetes-secrets \
+		--project=mit-lookit-keys
+	gcloud kms decrypt \
+		--ciphertext-file=kubernetes/lookit/environments/staging/cloudsql-client-creds.json.enc \
+		--plaintext-file=kubernetes/lookit/environments/staging/cloudsql-client-creds.json \
 		--location=us-east1 \
 		--keyring=lookit-keyring \
 		--key=kubernetes-secrets \
