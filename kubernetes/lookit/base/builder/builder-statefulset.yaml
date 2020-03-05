@@ -84,6 +84,10 @@ spec:
         secret:
           defaultMode: 420
           secretName: lookit-secrets
+      - name: cloudsql-instance-credentials
+        secret:
+          defaultMode: 420
+          secretName: cloudsql-instance-credentials
   volumeClaimTemplates:
   - metadata:
       name: docker-volume

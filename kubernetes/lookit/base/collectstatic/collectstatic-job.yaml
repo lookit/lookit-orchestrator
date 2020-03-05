@@ -29,6 +29,7 @@ spec:
           name: secret-volume
           readOnly: true
           subPath: googleAppCreds.json
+      restartPolicy: OnFailure
       volumes:
       - name: config-volume
         configMap:
@@ -38,3 +39,7 @@ spec:
         secret:
           defaultMode: 420
           secretName: lookit-secrets
+      - name: cloudsql-instance-credentials
+        secret:
+          defaultMode: 420
+          secretName: cloudsql-instance-credentials
