@@ -6,8 +6,6 @@ metadata:
     cloud-sql-proxy-sidecar: "injected"
     lookit-env-vars: "injected"
 spec:
-  selector:
-    - matchLabels:
   podManagementPolicy: OrderedReady
   serviceName: builder
   template:

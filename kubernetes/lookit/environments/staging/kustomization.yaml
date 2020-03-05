@@ -13,3 +13,7 @@ secretGenerator:
       - lookit-secrets.env
     files:
       - googleAppCreds.json
+  - name: cloudsql-instance-credentials
+    behavior: create
+    files:
+      - cloudsql-client-creds.json
