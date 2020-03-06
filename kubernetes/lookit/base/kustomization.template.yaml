@@ -58,6 +58,20 @@ vars:
       name: lookit-configmap
     fieldref:
       fieldpath: data.ENVIRONMENT
+  - name: RABBITMQ_HEADLESS_SERVICE_NAME
+    objref:
+      apiVersion: v1
+      kind: Service
+      name: lookit-rabbitmq-headless
+    fieldref:
+      fieldpath: metadata.name
+  - name: RABBITMQ_SERVICE_NAME
+    objref:
+      apiVersion: v1
+      kind: Service
+      name: lookit-rabbitmq
+    fieldref:
+      fieldpath: metadata.name
 
 patches:
   - path: patches_/add-cloud-sql-proxy-sidecar.yaml

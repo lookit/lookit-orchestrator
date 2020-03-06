@@ -4,7 +4,7 @@
   path: /spec/template/spec/containers/0/env/-
   value:
     name: RABBITMQ_HOST
-    value: localhost
+    value: $(RABBITMQ_SERVICE_NAME)
 
 - op: add
   path: /spec/template/spec/containers/0/env/-
@@ -22,7 +22,7 @@
   path: /spec/template/spec/containers/0/env/-
   value:
     name: RABBITMQ_USERNAME
-    value: lookit
+    value: admin
 
 - op: add
   path: /spec/template/spec/containers/0/env/-

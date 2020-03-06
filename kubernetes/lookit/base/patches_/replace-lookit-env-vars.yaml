@@ -2,13 +2,13 @@
   path: /spec/template/spec/containers/0/env
   value:
     - name: RABBITMQ_HOST
-      value: localhost
+      value: $(RABBITMQ_SERVICE_NAME)
     - name: RABBITMQ_PORT
       value: "5672"
     - name: RABBITMQ_VHOST
       value: /
     - name: RABBITMQ_USERNAME
-      value: lookit
+      value: admin
     - name: RABBITMQ_PASSWORD
       valueFrom:
         secretKeyRef:
