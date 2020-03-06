@@ -2,7 +2,7 @@
   path: /spec/template/spec/containers/0/env
   value:
     - name: RABBITMQ_HOST
-      value: lookit-rabbitmq
+      value: localhost
     - name: RABBITMQ_PORT
       value: "5672"
     - name: RABBITMQ_VHOST

@@ -1,1 +1,10 @@
+# Development
 .envrc
+
+# Generated Files
+kubernetes/lookit/base/kustomization.yaml
+
+# Secrets
+kubernetes/lookit/environments/*/googleAppCreds.json
+kubernetes/lookit/environments/*/lookit-secrets.env
+kubernetes/lookit/environments/*/cloudsql-client-creds.json

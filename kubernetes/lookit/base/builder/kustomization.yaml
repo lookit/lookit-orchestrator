@@ -1,5 +1,6 @@
 resources:
   - builder-statefulset.yaml
+  - ssd-storageclass.yaml
 commonLabels:
   app.kubernetes.io/name: builder
   app.kubernetes.io/component: experiment-builder

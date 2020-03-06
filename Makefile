@@ -97,6 +97,8 @@ decrypt-staging:
 		--key=kubernetes-secrets \
 		--project=mit-lookit-keys
 
+encrypt: encrypt-prod encrypt-staging
+
 clean:
 	rm kubernetes/manifests/*/*.yaml
 

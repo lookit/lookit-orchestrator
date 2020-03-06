@@ -7,6 +7,7 @@ resources:
   - web
   - worker
   - google-cloud-storage
+  - rabbitmq
 
 # TODO: if the issue below ever gets reopened
 #    https://github.com/kubernetes-sigs/kustomize/pull/1217

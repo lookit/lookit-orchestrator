@@ -4,7 +4,7 @@
   path: /spec/template/spec/containers/0/env/-
   value:
     name: RABBITMQ_HOST
-    value: lookit-rabbitmq
+    value: localhost
 
 - op: add
   path: /spec/template/spec/containers/0/env/-

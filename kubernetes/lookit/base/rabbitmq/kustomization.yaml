@@ -1,0 +1,13 @@
+resources:
+  - configuration.yaml
+  - healthchecks.yaml
+  - role.yaml
+  - rolebinding.yaml
+  - serviceaccount.yaml
+  - statefulset.yaml
+  - secrets.yaml
+  - svc.yaml
+  - svc-headless.yaml
+commonLabels:
+  app.kubernetes.io/name: rabbitmq
+  app.kubernetes.io/component: message-queue

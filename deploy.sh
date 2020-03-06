@@ -19,7 +19,7 @@ declare -A BRANCH_ENV_MAP=(
     [develop]="$STAGING_KUSTOMIZATIONS"
 )
 TARGET_KUSTOMIZATIONS=${BRANCH_ENV_MAP[$BRANCH_NAME]}
-printf "\ntarget kustomizations directory: %s" "$TARGET_KUSTOMIZATIONS"
+printf "\ntarget kustomizations directory: %s\n" "$TARGET_KUSTOMIZATIONS"
 
 # 2) Get correct manifests dir.
 # Branches --> manifest directories.
@@ -29,7 +29,7 @@ declare -A BRANCH_MANIFESTS_MAP=(
 )
 MANIFESTS_TARGET="${BRANCH_MANIFESTS_MAP[$BRANCH_NAME]}"
 mkdir -p "$MANIFESTS_TARGET"
-printf "\ntarget manifests directory: %s" "$MANIFESTS_TARGET"
+printf "\ntarget manifests directory: %s\n" "$MANIFESTS_TARGET"
 
 # 3) Get correct Makefile target for secret decryption.
 # Branches --> Makefile targets.
@@ -60,7 +60,7 @@ declare -A BRANCH_CLUSTERS_MAP=(
 )
 
 TARGET_CLUSTER="${BRANCH_CLUSTERS_MAP[$BRANCH_NAME]}"
-printf "\ntarget cluster for deployment: %s" "$TARGET_CLUSTER"
+printf "\ntarget cluster for deployment: %s\n" "$TARGET_CLUSTER"
 
 gcloud container clusters get-credentials "$TARGET_CLUSTER" --zone=us-east1-d
 kubectl apply -f "$MANIFESTS_TARGET"

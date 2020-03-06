@@ -24,6 +24,9 @@ spec:
         - containerPort: 5000
           name: wsgi
           protocol: TCP
+        - containerPort: 8080
+          name: http-test
+          protocol: TCP
         - containerPort: 1717
           name: stats
           protocol: TCP

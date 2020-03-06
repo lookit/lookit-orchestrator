@@ -7,7 +7,7 @@ metadata:
   labels:
     app: rabbitmq
     chart: rabbitmq-6.15.0
-    release: "lookit-rabbitmq"
+    release: "lookit"
     heritage: "Helm"
 spec:
   serviceName: lookit-rabbitmq-headless
@@ -18,12 +18,12 @@ spec:
   selector:
     matchLabels:
       app: rabbitmq
-      release: "lookit-rabbitmq"
+      release: "lookit"
   template:
     metadata:
       labels:
         app: rabbitmq
-        release: "lookit-rabbitmq"
+        release: "lookit"
         chart: rabbitmq-6.15.0
     spec:      
       serviceAccountName: lookit-rabbitmq
@@ -164,7 +164,7 @@ spec:
         - name: RABBIT_URL
           value: "http://localhost:15672"
         - name: RABBIT_USER
-          value: admin
+          value: lookit
         - name: PUBLISH_PORT
           value: "9419"
         
@@ -220,7 +220,7 @@ spec:
         name: data
         labels:
           app: rabbitmq
-          release: "lookit-rabbitmq"
+          release: "lookit"
           heritage: "Helm"
       spec:
         accessModes:
