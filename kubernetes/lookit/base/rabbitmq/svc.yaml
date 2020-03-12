@@ -13,21 +13,16 @@ spec:
   - name: epmd
     port: 4369
     targetPort: epmd
-    nodePort: null
   - name: amqp
     port: 5672
     targetPort: amqp
-    nodePort: null
   - name: dist
     port: 25672
     targetPort: dist
-    nodePort: null
   - name: stats
     port: 15672
     targetPort: stats
-    nodePort: null
   - name: metrics
     port: 9419
     targetPort: metrics
-    nodePort: null
   selector: {}
