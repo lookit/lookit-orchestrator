@@ -6,7 +6,7 @@ metadata:
     lookit-env-vars: "injected"
 spec:
   activeDeadlineSeconds: 900
-  backoffLimit: 6
+  backoffLimit: 5
   template:
     metadata:
       name: migration

@@ -63,4 +63,6 @@ TARGET_CLUSTER="${BRANCH_CLUSTERS_MAP[$BRANCH_NAME]}"
 printf "\ntarget cluster for deployment: %s\n" "$TARGET_CLUSTER"
 
 gcloud container clusters get-credentials "$TARGET_CLUSTER" --zone=us-east1-d
+# TODO: Figure out a better way than nuking the jobs every time.
+kubectl -n default delete job --all
 kubectl apply -f "$MANIFESTS_TARGET"

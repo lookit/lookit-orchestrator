@@ -1,6 +1,7 @@
 # taken from https://github.com/argoproj/argo-cd/issues/1639#issuecomment-494999921
 # Unused for now, given the restrictions that kustomize imposes
-# with regard to name.
+# with regard to name. See:
+# https://github.com/kubernetes-sigs/kustomize/issues/586
 - op: move
   from: /metadata/name
   path: /metadata/generateName
