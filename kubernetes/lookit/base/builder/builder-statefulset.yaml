@@ -3,9 +3,10 @@ kind: StatefulSet
 metadata:
   name: builder
   annotations:
-    cloud-sql-proxy-sidecar: "injected"
+#    cloud-sql-proxy-sidecar: "injected"
     lookit-env-vars: "injected"
 spec:
+  replicas: 1
   selector:
     matchLabels: {}
   podManagementPolicy: OrderedReady
@@ -13,7 +14,8 @@ spec:
   template:
     spec:
       containers:
-      - command:
+      - name: builder
+        command:
         - gosu
         - www-data
         - celery
@@ -36,7 +38,6 @@ spec:
             value: tcp://localhost:2375
         image: lookit
         imagePullPolicy: IfNotPresent
-        name: builder
         resources:
           limits:
             cpu: "2"
@@ -86,6 +87,10 @@ spec:
         secret:
           defaultMode: 420
           secretName: cloudsql-instance-credentials
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
   volumeClaimTemplates:
   - metadata:
       name: docker-volume

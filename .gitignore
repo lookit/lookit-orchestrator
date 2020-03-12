@@ -3,6 +3,8 @@
 
 # Generated Files
 kubernetes/lookit/base/kustomization.yaml
+kubernetes/manifests/production/*.yaml
+kubernetes/manifests/staging/*.yaml
 
 # Secrets
 kubernetes/lookit/environments/*/googleAppCreds.json

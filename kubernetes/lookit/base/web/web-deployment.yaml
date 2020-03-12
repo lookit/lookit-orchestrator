@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: web
   annotations:
-    cloud-sql-proxy-sidecar: "injected"
+#    cloud-sql-proxy-sidecar: "injected"
     lookit-env-vars: "replaced"
 spec:
   selector:

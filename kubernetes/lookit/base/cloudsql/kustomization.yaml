@@ -1,0 +1,6 @@
+resources:
+  - cloudsql-deployment.yaml
+  - cloudsql-service.yaml
+commonLabels:
+  app.kubernetes.io/name: cloudsql-proxy
+  app.kubernetes.io/component: google-cloudsql-proxy

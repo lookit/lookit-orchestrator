@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gcloud-sqlproxy
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+  - name: sqlproxy
+    port: 5432
+    protocol: TCP
+    targetPort: sqlproxy
+  selector: {}

@@ -1,4 +1,0 @@
-# Manifest artifacts - don't ever check these in since they'll contain
-# unencrypted secrets!
-production/*.yaml
-staging/*.yaml

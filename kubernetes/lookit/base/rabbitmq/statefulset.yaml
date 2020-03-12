@@ -10,9 +10,9 @@ metadata:
     release: "lookit"
     heritage: "Helm"
 spec:
+  replicas: 1
   serviceName: lookit-rabbitmq-headless
   podManagementPolicy: OrderedReady
-  replicas: 1
   updateStrategy:
     type: RollingUpdate
   selector:
@@ -29,7 +29,6 @@ spec:
       serviceAccountName: lookit-rabbitmq
       nodeSelector:
         beta.kubernetes.io/arch: amd64
-      terminationGracePeriodSeconds: 10
       initContainers:
       - name: volume-permissions
         image: "docker.io/bitnami/minideb:buster"
@@ -37,7 +36,6 @@ spec:
         command: ["/bin/chown", "-R", "1001:1001", "/opt/bitnami/rabbitmq/var/lib/rabbitmq"]
         securityContext:
           runAsUser: 0
-        resources: {}
         volumeMounts:
         - name: data
           mountPath: "/opt/bitnami/rabbitmq/var/lib/rabbitmq"
@@ -225,6 +223,6 @@ spec:
         accessModes:
           - "ReadWriteOnce"
         resources:
-            requests:
-              storage: "8Gi"
+          requests:
+            storage: "8Gi"
         storageClassName: ssd

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gcloud-sqlproxy
+spec:
+  selector: {}
+  progressDeadlineSeconds: 600
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    spec:
+#      affinity:
+#        podAntiAffinity:
+#          preferredDuringSchedulingIgnoredDuringExecution:
+#          - podAffinityTerm:
+#              topologyKey: kubernetes.io/hostname
+#            weight: 1
+      containers:
+      - command: ["/cloud_sql_proxy",
+                  "-instances=$(CLOUDSQL_INSTANCE_CONNECTION_NAME)=tcp:0.0.0.0:5432",
+                  "-credential_file=/secrets/cloudsql/cloudsql-client-creds.json"]
+        image: gcr.io/cloudsql-docker/gce-proxy:latest
+        resources:
+          limits:
+            cpu: 150m
+            memory: 150Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        name: cloud-sqlproxy
+        ports:
+        - containerPort: 5432
+          name: sqlproxy
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /secrets/cloudsql
+          name: cloudsql-instance-credentials
+      volumes:
+        - name: cloudsql-instance-credentials
+          secret:
+            defaultMode: 420
+            secretName: cloudsql-instance-credentials
+

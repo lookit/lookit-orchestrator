@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "worker"
+  name: worker
   annotations:
-    cloud-sql-proxy-sidecar: "injected"
+#    cloud-sql-proxy-sidecar: "injected"
     lookit-env-vars: "replaced"
 spec:
   selector:

@@ -7,8 +7,6 @@ metadata:
   labels:
     app: rabbitmq
     chart: rabbitmq-6.15.0
-    release: "lookit"
-    heritage: "Helm"
 rules:
 - apiGroups: [""]
   resources: ["endpoints"]
