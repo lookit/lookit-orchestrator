@@ -3,23 +3,23 @@ kind: Deployment
 metadata:
   name: web
   annotations:
-#    cloud-sql-proxy-sidecar: "injected"
-    lookit-env-vars: "replaced"
+    lookit-env-vars: "injected"
 spec:
   selector:
     matchLabels: {}
   template:
     spec:
       containers:
-      - command:
+      - name: uwsgi
+        image: lookit
+        imagePullPolicy: IfNotPresent
+        command:
         - uwsgi
         - --ini
         - /etc/uwsgi/uwsgi.ini
         - --socket
         - :5000
-        image: lookit
-        imagePullPolicy: IfNotPresent
-        name: uwsgi
+        env: []
         ports:
         - containerPort: 5000
           name: wsgi

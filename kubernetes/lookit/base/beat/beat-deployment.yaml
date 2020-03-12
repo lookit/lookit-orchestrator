@@ -3,8 +3,7 @@ kind: Deployment
 metadata:
   name: beat
   annotations:
-#    cloud-sql-proxy-sidecar: "injected"
-    lookit-env-vars: "replaced"
+    lookit-env-vars: "injected"
 spec:
   selector:
     matchLabels: {}
@@ -12,6 +11,8 @@ spec:
     spec:
       containers:
       - name: beat
+        image: lookit
+        imagePullPolicy: IfNotPresent
         command:
         - gosu
         - www-data
@@ -22,8 +23,7 @@ spec:
         - -l
         - DEBUG
         - --pidfile=
-        image: lookit
-        imagePullPolicy: IfNotPresent
+        env: []
         resources:
           limits:
             cpu: "1"

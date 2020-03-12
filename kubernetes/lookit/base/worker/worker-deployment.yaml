@@ -4,14 +4,17 @@ metadata:
   name: worker
   annotations:
 #    cloud-sql-proxy-sidecar: "injected"
-    lookit-env-vars: "replaced"
+    lookit-env-vars: "injected"
 spec:
   selector:
     matchLabels: {}
   template:
     spec:
       containers:
-      - command:
+      - name: worker
+        image: lookit
+        imagePullPolicy: IfNotPresent
+        command:
         - gosu
         - www-data
         - celery
@@ -29,9 +32,7 @@ spec:
         - "5"
         - -Q
         - email
-        image: lookit
-        imagePullPolicy: IfNotPresent
-        name: worker
+        env: []
         resources:
           limits:
             cpu: "2"

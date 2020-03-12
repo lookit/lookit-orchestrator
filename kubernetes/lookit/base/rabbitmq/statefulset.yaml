@@ -4,27 +4,14 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: lookit-rabbitmq
-  labels:
-    app: rabbitmq
-    chart: rabbitmq-6.15.0
-    release: "lookit"
-    heritage: "Helm"
 spec:
-  replicas: 1
   serviceName: lookit-rabbitmq-headless
   podManagementPolicy: OrderedReady
   updateStrategy:
     type: RollingUpdate
   selector:
-    matchLabels:
-      app: rabbitmq
-      release: "lookit"
+    matchLabels: {}
   template:
-    metadata:
-      labels:
-        app: rabbitmq
-        release: "lookit"
-        chart: rabbitmq-6.15.0
     spec:      
       serviceAccountName: lookit-rabbitmq
       nodeSelector:
@@ -215,10 +202,6 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: data
-        labels:
-          app: rabbitmq
-          release: "lookit"
-          heritage: "Helm"
       spec:
         accessModes:
           - "ReadWriteOnce"

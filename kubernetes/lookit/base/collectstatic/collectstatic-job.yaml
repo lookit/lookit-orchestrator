@@ -3,27 +3,24 @@ kind: Job
 metadata:
   name: collectstatic
   annotations:
-#    cloud-sql-proxy-sidecar: "injected"
-    lookit-env-vars: "replaced"
+    lookit-env-vars: "injected"
 spec:
   activeDeadlineSeconds: 900
   backoffLimit: 6
-#  completions: 1
-#  parallelism: 1
-  # ttlSecondsAfterFinished here?
   template:
     metadata:
       name: collectstatic
     spec:
       containers:
-      - command:
+      - name: collectstatic
+        image: lookit
+        imagePullPolicy: IfNotPresent
+        command:
         - python
         - manage.py
         - collectstatic
         - --noinput
-        image: lookit
-        imagePullPolicy: IfNotPresent
-        name: collectstatic
+        env: []
         volumeMounts:
         - mountPath: /etc/googleAppCreds.json
           name: secret-volume

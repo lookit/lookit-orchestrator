@@ -3,26 +3,23 @@ kind: Job
 metadata:
   name: migration
   annotations:
-#    cloud-sql-proxy-sidecar: "injected"
-    lookit-env-vars: "replaced"
+    lookit-env-vars: "injected"
 spec:
   activeDeadlineSeconds: 900
   backoffLimit: 6
-#  completions: 1
-#  parallelism: 1
-  # ttlSecondsAfterFinished here?
   template:
     metadata:
       name: migration
     spec:
       containers:
-      - command:
+      - name: migration
+        image: lookit
+        imagePullPolicy: IfNotPresent
+        command:
         - python
         - manage.py
         - migrate
-        image: lookit
-        imagePullPolicy: IfNotPresent
-        name: migration
+        env: []
         volumeMounts:
         - mountPath: /etc/googleAppCreds.json
           name: secret-volume
