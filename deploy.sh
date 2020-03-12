@@ -63,23 +63,4 @@ TARGET_CLUSTER="${BRANCH_CLUSTERS_MAP[$BRANCH_NAME]}"
 printf "\ntarget cluster for deployment: %s\n" "$TARGET_CLUSTER"
 
 gcloud container clusters get-credentials "$TARGET_CLUSTER" --zone=us-east1-d
-
-## 7) Apply in order
-## - first comes configs/secrets/services stuff...
-#find "$MANIFESTS_TARGET" -type f \
-#   | grep -E ".*(configmap|secret|service).*\.yaml" \
-#   > "$MANIFESTS_TARGET/manifest"
-#
-## - now cloudsql-proxy deployment...
-#find "$MANIFESTS_TARGET" -type f\
-#   | grep -E ".*(cloud-sqlproxy).*\.yaml" \
-#   >> "$MANIFESTS_TARGET/manifest"
-#
-## - ... and finally the rest.
-#find "$MANIFESTS_TARGET" -type f \
-#   | grep -vE ".*(configmap|secret|service|cloud-sqlproxy).*\.yaml" \
-#   >> "$MANIFESTS_TARGET/manifest"
-#
-#<"$MANIFESTS_TARGET/manifest" xargs -I % kubectl apply -f %
-
 kubectl apply -f "$MANIFESTS_TARGET"
