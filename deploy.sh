@@ -49,6 +49,10 @@ envsubst \
   < kubernetes/lookit/base/kustomization.template.yaml \
   > kubernetes/lookit/base/kustomization.yaml
 
+envsubst \
+  < kubernetes/lookit/transformers/label-transformer.template.yaml \
+  > kubernetes/lookit/transformers/label-transformer.yaml
+
 # 5) Generate the actual configs.
 kustomize build --reorder none -o "$MANIFESTS_TARGET" "${TARGET_KUSTOMIZATIONS}"
 

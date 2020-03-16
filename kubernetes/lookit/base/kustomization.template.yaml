@@ -16,11 +16,14 @@ resources:
 configurations:
 - kustomizeconfig.yaml
 
-commonLabels:
-  app.kubernetes.io/instance: lookit-$SHORT_SHA
-  app.kubernetes.io/version: $TAG_NAME
-  app.kubernetes.io/part-of: lookit
-  app.kubernetes.io/managed-by: kustomize
+#transformers:
+#- ../transformers
+
+#commonLabels:
+#  app.kubernetes.io/instance: lookit-$SHORT_SHA
+#  app.kubernetes.io/version: $TAG_NAME
+#  app.kubernetes.io/part-of: lookit
+#  app.kubernetes.io/managed-by: kustomize
 
 images:
 - name: lookit

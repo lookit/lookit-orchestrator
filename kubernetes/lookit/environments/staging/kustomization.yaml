@@ -17,3 +17,5 @@ secretGenerator:
     behavior: create
     files:
       - cloudsql-client-creds.json
+transformers:
+- ../../transformers
