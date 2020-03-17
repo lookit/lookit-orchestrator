@@ -19,6 +19,3 @@ spec:
   - name: stats
     port: 15672
     targetPort: stats
-  selector:
-    app: rabbitmq
-    release: "lookit"
