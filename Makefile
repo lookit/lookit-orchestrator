@@ -99,8 +99,12 @@ decrypt-staging:
 
 encrypt: encrypt-prod encrypt-staging
 
+ingress:
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/provider/cloud-generic.yaml
+
 clean:
 	rm kubernetes/manifests/*/*.yaml
 
-.PHONY: test-deploy-script test-cloud-build encrypt-staging encrypt-prod decrypt-prod decrypt-staging clean
+.PHONY: test-deploy-script test-cloud-build encrypt-staging encrypt-prod decrypt-prod decrypt-staging ingress clean
 

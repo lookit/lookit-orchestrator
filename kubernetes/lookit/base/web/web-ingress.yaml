@@ -10,10 +10,10 @@ spec:
     - host: $(SITE_DOMAIN)
       http:
         paths:
-          - path: /.*
+          - path: /
             backend:
               serviceName: web
-              servicePort: 5000
+              servicePort: 80
   tls:
     - hosts:
       - $(SITE_DOMAIN)

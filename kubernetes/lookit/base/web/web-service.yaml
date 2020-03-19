@@ -7,7 +7,7 @@ spec:
   ports:
   - name: http
     nodePort: 32403
-    port: 5000
+    port: 80
     protocol: TCP
-    targetPort: 80
+    targetPort: http
   type: NodePort
