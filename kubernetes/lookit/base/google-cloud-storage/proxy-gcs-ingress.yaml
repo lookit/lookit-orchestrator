@@ -4,6 +4,7 @@ metadata:
   name: proxy-gcs-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: $(CLUSTER_ISSUER)
     nginx.ingress.kubernetes.io/rewrite-target: "/lookit-$(ENVIRONMENT)/$1/$3"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/upstream-vhost: "storage.googleapis.com"

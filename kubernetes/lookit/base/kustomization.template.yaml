@@ -48,6 +48,13 @@ vars:
       name: lookit-configmap
     fieldref:
       fieldpath: data.CLOUDSQL_INSTANCE_CONNECTION_NAME
+  - name: CLUSTER_ISSUER
+    objref:
+      apiVersion: v1
+      kind: ConfigMap
+      name: lookit-configmap
+    fieldref:
+      fieldpath: data.CLUSTER_ISSUER
   - name: SITE_DOMAIN
     objref:
       apiVersion: v1

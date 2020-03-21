@@ -1,5 +1,6 @@
 resources:
   - ../../base
+  - cluster-issuer.yaml
 namePrefix: staging-
 configMapGenerator:
   - name: lookit-configmap

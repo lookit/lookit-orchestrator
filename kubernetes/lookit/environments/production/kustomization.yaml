@@ -1,5 +1,6 @@
 resources:
   - ../../base
+  - cluster-issuer.yaml
 namePrefix: production-
 configMapGenerator:
   - name: lookit-configmap
@@ -17,3 +18,5 @@ secretGenerator:
     behavior: create
     files:
       - cloudsql-client-creds.json
+transformers:
+- ../../transformers

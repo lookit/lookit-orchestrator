@@ -9,3 +9,5 @@ varReference:
   path: data/SITE_DOMAIN
 - kind: ConfigMap
   path: data/ENVIRONMENT
+- kind: ConfigMap
+  path: data/CLUSTER_ISSUER

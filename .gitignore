@@ -3,7 +3,7 @@
 
 # Generated Files
 kubernetes/lookit/base/kustomization.yaml
-kubernetes/lookit/transformers/label-transformer.yaml
+kubernetes/lookit/transformers/dynamic-labels.yaml
 kubernetes/manifests/production/*.yaml
 kubernetes/manifests/staging/*.yaml
 
