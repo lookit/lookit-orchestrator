@@ -35,7 +35,11 @@ spec:
         - builds,cleanup
         env:
         - name: DOCKER_HOST
-          value: tcp://localhost:2375
+          value: tcp://localhost:2376  # use TLS port
+        - name: DOCKER_TLS_VERIFY
+          value: "1"
+        - name: DOCKER_CERT_PATH
+          value: "/certs/client"
         resources:
           limits:
             cpu: "2"
@@ -44,32 +48,38 @@ spec:
             cpu: 10m
             memory: 128Mi
         volumeMounts:
-        - mountPath: /code/ember_build/checkouts
-          name: checkouts-volume
-        - mountPath: /code/ember_build/deployments
-          name: deployments-volume
-        - mountPath: /etc/googleAppCreds.json
-          name: secret-volume
+        - name: checkouts-volume
+          mountPath: /code/ember_build/checkouts
+        - name: deployments-volume
+          mountPath: /code/ember_build/deployments
+        - name: secret-volume
+          mountPath: /etc/googleAppCreds.json
           readOnly: true
           subPath: googleAppCreds.json
+        - name: docker-client-certs
+          mountPath: /certs/client
       - image: docker:dind
         imagePullPolicy: Always
         name: docker
         ports:
-          - containerPort: 2375
+          - containerPort: 2376
             name: docker
             protocol: TCP
         securityContext:
           privileged: true
         volumeMounts:
-          - mountPath: /var/lib/docker
-            name: docker-volume
-          - mountPath: /code/ember_build/checkouts
-            name: checkouts-volume
-          - mountPath: /code/ember_build/deployments
-            name: deployments-volume
+        - name: docker-volume
+          mountPath: /var/lib/docker
+        - name: docker-client-certs
+          mountPath: /certs/client
+        - name: checkouts-volume
+          mountPath: /code/ember_build/checkouts
+        - name: deployments-volume
+          mountPath: /code/ember_build/deployments
       volumes:
       - name: checkouts-volume
+        emptyDir: {}
+      - name: docker-client-certs
         emptyDir: {}
       - name: deployments-volume
         emptyDir: {}
