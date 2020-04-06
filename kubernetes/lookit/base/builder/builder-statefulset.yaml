@@ -4,6 +4,8 @@ metadata:
   name: builder
   annotations:
     lookit-env-vars: "injected"
+    wait-for-gcloud-sqlproxy: "true"
+    wait-for-rabbitmq: "true"
 spec:
   selector:
     matchLabels: {}
@@ -11,6 +13,7 @@ spec:
   serviceName: builder
   template:
     spec:
+      initContainers: []
       containers:
       - name: builder
         image: lookit

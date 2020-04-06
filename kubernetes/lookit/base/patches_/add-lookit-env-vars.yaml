@@ -233,6 +233,15 @@
 - op: add
   path: /spec/template/spec/containers/0/env/-
   value:
+    name: ENVIRONMENT
+    valueFrom:
+      configMapKeyRef:
+        key: ENVIRONMENT
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/0/env/-
+  value:
     name: AWS_ACCESS_KEY_ID
     valueFrom:
       secretKeyRef:

@@ -4,11 +4,14 @@ metadata:
   name: worker
   annotations:
     lookit-env-vars: "injected"
+    wait-for-gcloud-sqlproxy: "true"
+    wait-for-rabbitmq: "true"
 spec:
   selector:
     matchLabels: {}
   template:
     spec:
+      initContainers: []
       containers:
       - name: worker
         image: lookit

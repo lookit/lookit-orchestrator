@@ -1,14 +1,14 @@
 namespace: default
 resources:
-  - cloudsql
-  - beat
-  - builder
-  - collectstatic
-  - migration
-  - web
-  - worker
-  - google-cloud-storage
-  - rabbitmq
+- cloudsql
+- beat
+- builder
+- collectstatic
+- migration
+- web
+- worker
+- google-cloud-storage
+- rabbitmq
 
 # TODO: if the issue below ever gets reopened
 #    https://github.com/kubernetes-sigs/kustomize/pull/1217
@@ -16,14 +16,9 @@ resources:
 configurations:
 - kustomizeconfig.yaml
 
+# Only present in environment-specific directories!
 #transformers:
 #- ../transformers
-
-#commonLabels:
-#  app.kubernetes.io/instance: lookit-$SHORT_SHA
-#  app.kubernetes.io/version: $TAG_NAME
-#  app.kubernetes.io/part-of: lookit
-#  app.kubernetes.io/managed-by: kustomize
 
 images:
 - name: lookit
@@ -35,62 +30,69 @@ generatorOptions:
   disableNameSuffixHash: true
 
 configMapGenerator:
-  - name: lookit-configmap
-    files:
-      - files_/uwsgi.ini
-      - files_/robots.txt
+- name: lookit-configmap
+  files:
+    - files_/uwsgi.ini
+    - files_/robots.txt
 
 vars:
-  - name: CLOUDSQL_INSTANCE_CONNECTION_NAME
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: lookit-configmap
-    fieldref:
-      fieldpath: data.CLOUDSQL_INSTANCE_CONNECTION_NAME
-  - name: CLUSTER_ISSUER
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: lookit-configmap
-    fieldref:
-      fieldpath: data.CLUSTER_ISSUER
-  - name: SITE_DOMAIN
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: lookit-configmap
-    fieldref:
-      fieldpath: data.SITE_DOMAIN
-  - name: ENVIRONMENT
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: lookit-configmap
-    fieldref:
-      fieldpath: data.ENVIRONMENT
-  - name: RABBITMQ_HEADLESS_SERVICE_NAME
-    objref:
-      apiVersion: v1
-      kind: Service
-      name: lookit-rabbitmq-headless
-    fieldref:
-      fieldpath: metadata.name
-  - name: RABBITMQ_SERVICE_NAME
-    objref:
-      apiVersion: v1
-      kind: Service
-      name: lookit-rabbitmq
-    fieldref:
-      fieldpath: metadata.name
+- name: CLOUDSQL_INSTANCE_CONNECTION_NAME
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: lookit-configmap
+  fieldref:
+    fieldpath: data.CLOUDSQL_INSTANCE_CONNECTION_NAME
+- name: CLUSTER_ISSUER
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: lookit-configmap
+  fieldref:
+    fieldpath: data.CLUSTER_ISSUER
+- name: SITE_DOMAIN
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: lookit-configmap
+  fieldref:
+    fieldpath: data.SITE_DOMAIN
+- name: ENVIRONMENT
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: lookit-configmap
+  fieldref:
+    fieldpath: data.ENVIRONMENT
+- name: RABBITMQ_HEADLESS_SERVICE_NAME
+  objref:
+    apiVersion: v1
+    kind: Service
+    name: lookit-rabbitmq-headless
+  fieldref:
+    fieldpath: metadata.name
+- name: RABBITMQ_SERVICE_NAME
+  objref:
+    apiVersion: v1
+    kind: Service
+    name: lookit-rabbitmq
+  fieldref:
+    fieldpath: metadata.name
+- name: GCLOUD_SQLPROXY_SERVICE_NAME
+  objref:
+    apiVersion: v1
+    kind: Service
+    name: gcloud-sqlproxy
+  fieldref:
+    fieldpath: metadata.name
 
 patches:
-  - path: patches_/add-cloud-sql-proxy-sidecar.yaml
-    target:
-      annotationSelector: "cloud-sql-proxy-sidecar=injected"
-  - path: patches_/add-lookit-env-vars.yaml
-    target:
-      annotationSelector: "lookit-env-vars=injected"
-  - path: patches_/replace-lookit-env-vars.yaml
-    target:
-      annotationSelector: "lookit-env-vars=replaced"
+- path: patches_/add-lookit-env-vars.yaml
+  target:
+    annotationSelector: "lookit-env-vars=injected"
+- path: patches_/wait-init-rabbitmq.yaml
+  target:
+    annotationSelector: "wait-for-rabbitmq in (true, True, TRUE, 1, yes, Yes, YES)"
+- path: patches_/wait-init-gcloud-sqlproxy.yaml
+  target:
+    annotationSelector: "wait-for-gcloud-sqlproxy in (true, True, TRUE, 1, yes, Yes, YES)"

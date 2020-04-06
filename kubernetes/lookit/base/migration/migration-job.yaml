@@ -4,6 +4,8 @@ metadata:
   name: migration
   annotations:
     lookit-env-vars: "injected"
+    wait-for-gcloud-sqlproxy: "true"
+    wait-for-rabbitmq: "true"
 spec:
   activeDeadlineSeconds: 900
   backoffLimit: 5
@@ -11,6 +13,7 @@ spec:
     metadata:
       name: migration
     spec:
+      initContainers: []
       containers:
       - name: migration
         image: lookit

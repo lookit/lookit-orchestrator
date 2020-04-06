@@ -1,0 +1,10 @@
+- op: add
+  path: /spec/template/spec/initContainers/-
+  value:
+    name: wait-init-gcloud-sqlproxy
+    image: busybox:latest
+    command: [
+      'sh',
+      '-c',
+      "until nslookup $(GCLOUD_SQLPROXY_SERVICE_NAME).$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for $(GCLOUD_SQLPROXY_SERVICE_NAME); sleep 2; done"
+    ]

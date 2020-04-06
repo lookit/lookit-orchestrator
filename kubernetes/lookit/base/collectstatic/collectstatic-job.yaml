@@ -4,6 +4,7 @@ metadata:
   name: collectstatic
   annotations:
     lookit-env-vars: "injected"
+    wait-for-gcloud-sqlproxy: "true"
 spec:
   activeDeadlineSeconds: 900
   backoffLimit: 6
@@ -11,6 +12,7 @@ spec:
     metadata:
       name: collectstatic
     spec:
+      initContainers: []
       containers:
       - name: collectstatic
         image: lookit

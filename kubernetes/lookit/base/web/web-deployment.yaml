@@ -4,11 +4,13 @@ metadata:
   name: web
   annotations:
     lookit-env-vars: "injected"
+    wait-for-gcloud-sqlproxy: "true"
 spec:
   selector:
     matchLabels: {}
   template:
     spec:
+      initContainers: []
       containers:
       - name: uwsgi
         image: lookit

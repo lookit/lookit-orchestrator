@@ -46,6 +46,21 @@ to manipulate crypto keys.
 ConfigMap values *must* be defined in the base `kustomizeconfig.yaml` as a `varReference` before they are
 referenced in `kustomization.yaml`.
 
+- `add-lookit-env-vars.yaml` has a fragile patching system right now - because we can't target container elements
+by name, we have to have injections like such:
+```.yaml
+- op: add
+  path: /spec/template/spec/containers/0/env/-
+  value:
+    name: ENVIRONMENT
+    valueFrom:
+      configMapKeyRef:
+        key: ENVIRONMENT
+        name: lookit-configmap
+```
+where the path has a hardcoded zero to indicate the first array. This is obviously
+not optimal; I'm open to better solutions.
+
 ### Design Considerations FAQ
 
 #### Why Kustomize (and not Helm, Kapitan, custom tooling, etc.)?
