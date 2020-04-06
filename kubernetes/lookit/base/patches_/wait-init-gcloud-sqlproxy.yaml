@@ -2,7 +2,7 @@
   path: /spec/template/spec/initContainers/-
   value:
     name: wait-init-gcloud-sqlproxy
-    image: busybox:latest
+    image: busybox:1.28
     command: [
       'sh',
       '-c',
