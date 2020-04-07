@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: builder
   annotations:
-    lookit-env-vars: "injected"
+    lookit-env-vars: "second-container"
     wait-for-gcloud-sqlproxy: "true"
     wait-for-rabbitmq: "true"
 spec:
@@ -15,6 +15,24 @@ spec:
     spec:
       initContainers: []
       containers:
+      - name: docker
+        image: docker:dind
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 2376
+            name: docker
+            protocol: TCP
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: docker-volume
+            mountPath: /var/lib/docker
+          - name: docker-client-certs
+            mountPath: /certs/client
+          - name: checkouts-volume
+            mountPath: /code/ember_build/checkouts
+          - name: deployments-volume
+            mountPath: /code/ember_build/deployments
       - name: builder
         image: lookit
         imagePullPolicy: IfNotPresent
@@ -61,24 +79,6 @@ spec:
           subPath: googleAppCreds.json
         - name: docker-client-certs
           mountPath: /certs/client
-      - image: docker:dind
-        imagePullPolicy: Always
-        name: docker
-        ports:
-          - containerPort: 2376
-            name: docker
-            protocol: TCP
-        securityContext:
-          privileged: true
-        volumeMounts:
-        - name: docker-volume
-          mountPath: /var/lib/docker
-        - name: docker-client-certs
-          mountPath: /certs/client
-        - name: checkouts-volume
-          mountPath: /code/ember_build/checkouts
-        - name: deployments-volume
-          mountPath: /code/ember_build/deployments
       volumes:
       - name: checkouts-volume
         emptyDir: {}

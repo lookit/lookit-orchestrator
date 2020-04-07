@@ -90,6 +90,9 @@ patches:
 - path: patches_/add-lookit-env-vars.yaml
   target:
     annotationSelector: "lookit-env-vars=injected"
+- path: patches_/add-lookit-env-vars-to-second-container.yaml
+  target:
+    annotationSelector: "lookit-env-vars=second-container"
 - path: patches_/wait-init-rabbitmq.yaml
   target:
     annotationSelector: "wait-for-rabbitmq in (true, True, TRUE, 1, yes, Yes, YES)"

@@ -48,18 +48,25 @@ referenced in `kustomization.yaml`.
 
 - `add-lookit-env-vars.yaml` has a fragile patching system right now - because we can't target container elements
 by name, we have to have injections like such:
-```.yaml
-- op: add
-  path: /spec/template/spec/containers/0/env/-
-  value:
-    name: ENVIRONMENT
-    valueFrom:
-      configMapKeyRef:
-        key: ENVIRONMENT
-        name: lookit-configmap
-```
-where the path has a hardcoded zero to indicate the first array. This is obviously
-not optimal; I'm open to better solutions.
+    ```.yaml
+    - op: add
+      path: /spec/template/spec/containers/0/env/-
+      value:
+        name: ENVIRONMENT
+        valueFrom:
+          configMapKeyRef:
+            key: ENVIRONMENT
+            name: lookit-configmap
+    ```
+    here, the path has a hardcoded zero to indicate the first array. 
+    This is obviously not optimal; I'm open to better solutions.
+
+- **Why the custom transformer for labels, rather than using commonLabels out of the box?** In short,
+we can't apply labels globally like `commonLabels` would if we are to implement version-specific labels
+(like `app.kubernetes.io/version`, recommended by the 
+[Kubernetes Working Group](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels)).
+`kubectl` prevents you from attempting to change the `matchLabels` clause of an existing Deployment or StatefulSet so
+that pods can be accurately selected for rolling deployments.
 
 ### Design Considerations FAQ
 

@@ -1,0 +1,420 @@
+# TODO: Actually, this would be a perfect candidate
+#     for jsonnet-ification.
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: RABBITMQ_HOST
+    value: $(RABBITMQ_SERVICE_NAME)
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: RABBITMQ_PORT
+    value: "5672"
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: RABBITMQ_VHOST
+    value: /
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: RABBITMQ_USERNAME
+    value: admin
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: RABBITMQ_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: rabbitmq-password
+        name: lookit-secrets
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: ACCOUNT_LOGOUT_REDIRECT_URL
+    valueFrom:
+      configMapKeyRef:
+        key: ACCOUNT_LOGOUT_REDIRECT_URL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: ALLOWED_HOSTS
+    valueFrom:
+      configMapKeyRef:
+        key: ALLOWED_HOSTS
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: BASE_URL
+    valueFrom:
+      configMapKeyRef:
+        key: BASE_URL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: CORS_ORIGIN_ALLOW_ALL
+    valueFrom:
+      configMapKeyRef:
+        key: CORS_ORIGIN_ALLOW_ALL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: CORS_ORIGIN_ALLOW_WHISTELIST
+    valueFrom:
+      configMapKeyRef:
+        key: CORS_ORIGIN_ALLOW_WHISTELIST
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: DEBUG
+    valueFrom:
+      configMapKeyRef:
+        key: DEBUG
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: DJANGO_SETTINGS_MODULE
+    valueFrom:
+      configMapKeyRef:
+        key: DJANGO_SETTINGS_MODULE
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: EMAIL_FROM_ADDRESS
+    valueFrom:
+      configMapKeyRef:
+        key: EMAIL_FROM_ADDRESS
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: EMBER_ADDONS_BRANCH
+    valueFrom:
+      configMapKeyRef:
+        key: EMBER_ADDONS_BRANCH
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: EMBER_ADDONS_REPO
+    valueFrom:
+      configMapKeyRef:
+        key: EMBER_ADDONS_REPO
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: EMBER_EXP_PLAYER_BRANCH
+    valueFrom:
+      configMapKeyRef:
+        key: EMBER_EXP_PLAYER_BRANCH
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: EMBER_EXP_PLAYER_REPO
+    valueFrom:
+      configMapKeyRef:
+        key: EMBER_EXP_PLAYER_REPO
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: EXPERIMENT_BASE_URL
+    valueFrom:
+      configMapKeyRef:
+        key: EXPERIMENT_BASE_URL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: GEVENT
+    valueFrom:
+      configMapKeyRef:
+        key: GEVENT
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: LOGIN_REDIRECT_URL
+    valueFrom:
+      configMapKeyRef:
+        key: LOGIN_REDIRECT_URL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: MEDIA_URL
+    valueFrom:
+      configMapKeyRef:
+        key: MEDIA_URL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: OSF_ACCOUNTS_URL
+    valueFrom:
+      configMapKeyRef:
+        key: OSF_ACCOUNTS_URL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: OSF_API_URL
+    valueFrom:
+      configMapKeyRef:
+        key: OSF_API_URL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: OSF_URL
+    valueFrom:
+      configMapKeyRef:
+        key: OSF_URL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: PREVIEW_EXPERIMENT_BASE_URL
+    valueFrom:
+      configMapKeyRef:
+        key: PREVIEW_EXPERIMENT_BASE_URL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: SITE_DOMAIN
+    valueFrom:
+      configMapKeyRef:
+        key: SITE_DOMAIN
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: STATIC_URL
+    valueFrom:
+      configMapKeyRef:
+        key: STATIC_URL
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: ENVIRONMENT
+    valueFrom:
+      configMapKeyRef:
+        key: ENVIRONMENT
+        name: lookit-configmap
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: AWS_ACCESS_KEY_ID
+    valueFrom:
+      secretKeyRef:
+        key: AWS_ACCESS_KEY_ID
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: AWS_SECRET_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        key: AWS_SECRET_ACCESS_KEY
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: BUCKET_NAME
+    valueFrom:
+      secretKeyRef:
+        key: BUCKET_NAME
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: DB_HOST
+    valueFrom:
+      secretKeyRef:
+        key: DB_HOST
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: DB_NAME
+    valueFrom:
+      secretKeyRef:
+        key: DB_NAME
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: DB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: DB_PASSWORD
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: DB_USER
+    valueFrom:
+      secretKeyRef:
+        key: DB_USER
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: GOOGLE_APPLICATION_CREDENTIALS
+    valueFrom:
+      secretKeyRef:
+        key: GOOGLE_APPLICATION_CREDENTIALS
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: GS_BUCKET_NAME
+    valueFrom:
+      secretKeyRef:
+        key: GS_BUCKET_NAME
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: GS_PRIVATE_BUCKET_NAME
+    valueFrom:
+      secretKeyRef:
+        key: GS_PRIVATE_BUCKET_NAME
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: GS_PROJECT_ID
+    valueFrom:
+      secretKeyRef:
+        key: GS_PROJECT_ID
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: OSF_OAUTH_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        key: OSF_OAUTH_CLIENT_ID
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: OSF_OAUTH_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: OSF_OAUTH_SECRET
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: PIPE_ACCOUNT_HASH
+    valueFrom:
+      secretKeyRef:
+        key: PIPE_ACCOUNT_HASH
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: PIPE_ENVIRONMENT
+    valueFrom:
+      secretKeyRef:
+        key: PIPE_ENVIRONMENT
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: PIPE_WEBHOOK_KEY
+    valueFrom:
+      secretKeyRef:
+        key: PIPE_WEBHOOK_KEY
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        key: SECRET_KEY
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: SENDGRID_API_KEY
+    valueFrom:
+      secretKeyRef:
+        key: SENDGRID_API_KEY
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: SENTRY_DSN
+    valueFrom:
+      secretKeyRef:
+        key: SENTRY_DSN
+        name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: SENTRY_DSN_JS
+    valueFrom:
+      secretKeyRef:
+        key: SENTRY_DSN_JS
+        name: lookit-secrets
