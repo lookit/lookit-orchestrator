@@ -2,9 +2,10 @@
   path: /spec/template/spec/initContainers/-
   value:
     name: wait-init-rabbitmq
-    image: busybox:1.28
-    command: [
-      'sh',
-      '-c',
-      "until nslookup $(RABBITMQ_SERVICE_NAME).$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for $(RABBITMQ_SERVICE_NAME); sleep 2; done"
+    image: bitnami/kubectl:latest
+    args: [
+      "rollout",
+      "status",
+      "statefulset",
+      "$(RABBITMQ_STATEFULSET_NAME)"
     ]

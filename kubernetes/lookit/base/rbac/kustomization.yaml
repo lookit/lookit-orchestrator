@@ -1,0 +1,5 @@
+resources:
+- deployment-statefulset-reader-role.yaml
+- rollout-waiter-rolebinding.yaml
+- rollout-waiter-serviceaccount.yaml
+- rollout-waiter-token-secret.yaml

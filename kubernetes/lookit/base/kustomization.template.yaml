@@ -1,6 +1,8 @@
 namespace: default
 resources:
+- rbac
 - cloudsql
+- rabbitmq
 - beat
 - builder
 - collectstatic
@@ -8,7 +10,6 @@ resources:
 - web
 - worker
 - google-cloud-storage
-- rabbitmq
 
 # TODO: if the issue below ever gets reopened
 #    https://github.com/kubernetes-sigs/kustomize/pull/1217
@@ -78,10 +79,24 @@ vars:
     name: lookit-rabbitmq
   fieldref:
     fieldpath: metadata.name
+- name: RABBITMQ_STATEFULSET_NAME
+  objref:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: lookit-rabbitmq
+  fieldref:
+    fieldpath: metadata.name
 - name: GCLOUD_SQLPROXY_SERVICE_NAME
   objref:
     apiVersion: v1
     kind: Service
+    name: gcloud-sqlproxy
+  fieldref:
+    fieldpath: metadata.name
+- name: GCLOUD_SQLPROXY_DEPLOYMENT_NAME
+  objref:
+    apiVersion: apps/v1
+    kind: Deployment
     name: gcloud-sqlproxy
   fieldref:
     fieldpath: metadata.name
@@ -96,6 +111,12 @@ patches:
 - path: patches_/wait-init-rabbitmq.yaml
   target:
     annotationSelector: "wait-for-rabbitmq in (true, True, TRUE, 1, yes, Yes, YES)"
+- path: patches_/add-rollout-waiter-serviceaccount.yaml
+  target:
+    annotationSelector: "wait-for-rabbitmq in (true, True, TRUE, 1, yes, Yes, YES)"
 - path: patches_/wait-init-gcloud-sqlproxy.yaml
+  target:
+    annotationSelector: "wait-for-gcloud-sqlproxy in (true, True, TRUE, 1, yes, Yes, YES)"
+- path: patches_/add-rollout-waiter-serviceaccount.yaml
   target:
     annotationSelector: "wait-for-gcloud-sqlproxy in (true, True, TRUE, 1, yes, Yes, YES)"
