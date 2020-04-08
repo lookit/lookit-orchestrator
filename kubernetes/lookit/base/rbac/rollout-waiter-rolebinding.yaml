@@ -4,9 +4,8 @@ metadata:
   name: rollout-waiter-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
+  kind: Role
   name: deployment-statefulset-reader
 subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: ServiceAccount
+- kind: ServiceAccount
   name: rollout-waiter

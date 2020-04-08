@@ -4,6 +4,6 @@ metadata:
   namespace: default
   name: deployment-statefulset-reader
 rules:
-- apiGroups: ["", "extensions"] # "" indicates the core API group
+- apiGroups: ["", "apps", "extensions"]  # "" indicates the core API group
   resources: ["deployments", "statefulsets"]
   verbs: ["get", "watch", "list"]
