@@ -95,6 +95,11 @@ spec:
           periodSeconds: 30
           failureThreshold: 3
           successThreshold: 1
+        startupProbe:
+          tcpSocket:
+            port: 5672
+          initialDelaySeconds: 5
+          periodSeconds: 5
         env:
           - name: BITNAMI_DEBUG
             value: "false"

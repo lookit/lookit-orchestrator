@@ -7,5 +7,6 @@
       "rollout",
       "status",
       "statefulset",
+      "-w",
       "$(RABBITMQ_STATEFULSET_NAME)"
     ]

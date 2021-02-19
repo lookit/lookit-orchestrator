@@ -13,3 +13,8 @@
       - name: cloudsql-instance-credentials
         mountPath: /secrets/cloudsql
         readOnly: true
+    startupProbe:
+      tcpSocket:
+        port: 5432
+      initialDelaySeconds: 5
+      periodSeconds: 5

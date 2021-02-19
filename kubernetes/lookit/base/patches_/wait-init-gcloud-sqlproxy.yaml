@@ -7,5 +7,6 @@
       "rollout",
       "status",
       "deployment",
+      "-w",
       "$(GCLOUD_SQLPROXY_DEPLOYMENT_NAME)"
     ]
