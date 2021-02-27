@@ -19,8 +19,6 @@ spec:
         - uwsgi
         - --ini
         - /etc/uwsgi/uwsgi.ini
-        - --socket
-        - :5000
         env: []
         ports:
         - containerPort: 5000
