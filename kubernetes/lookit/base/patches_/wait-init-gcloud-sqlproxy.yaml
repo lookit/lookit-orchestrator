@@ -7,4 +7,4 @@
     - bash
     args: 
     - -c
-    - until pg_isready -h $(GCLOUD_SQLPROXY_SERVICE_NAME); do sleep 5; done
+    - until pg_isready -h $(GCLOUD_SQLPROXY_SERVICE_NAME); do echo waiting for sqlproxy; sleep 5; done
