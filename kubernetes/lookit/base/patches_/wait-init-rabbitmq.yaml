@@ -4,4 +4,4 @@
     name: wait-init-rabbitmq
     image: busybox
     command: ["sh", "-c"]
-    args: ["until nc -vn rabbitmq:5672; do echo waiting for rabbitmq; sleep 2; done"]
+    args: ["until nc -vn $(RABBITMQ_SERVICE_NAME):5672; do echo waiting for rabbitmq; sleep 2; done"]
