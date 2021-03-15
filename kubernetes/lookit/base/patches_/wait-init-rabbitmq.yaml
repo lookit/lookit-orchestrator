@@ -2,11 +2,6 @@
   path: /spec/template/spec/initContainers/-
   value:
     name: wait-init-rabbitmq
-    image: bitnami/kubectl:latest
-    args: [
-      "rollout",
-      "status",
-      "statefulset",
-      "-w",
-      "$(RABBITMQ_STATEFULSET_NAME)"
-    ]
+    image: busybox
+    command: ["sh", "-c"]
+    args: ["until nc -vn $(RABBITMQ_SERVICE_NAME):5672; do echo waiting for rabbitmq; sleep 2; done"]
