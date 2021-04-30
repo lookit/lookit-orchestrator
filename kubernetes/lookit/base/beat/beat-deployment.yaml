@@ -11,14 +11,7 @@ spec:
     matchLabels: {}
   template:
     spec:
-      initContainers: 
-      - name: init-sqlproxy
-        image: busybox:1.33
-        command:
-        - /bin/sh
-        args:
-        - -c
-        - for i in {1..100}; do sleep 1; if dig $(SQLPROXY_SERVICE_NAME); exit 0; fi; exit 1
+      initContainers: []
       containers:
       - name: beat
         image: lookit

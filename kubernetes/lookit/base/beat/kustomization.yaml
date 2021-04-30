@@ -3,11 +3,3 @@ resources:
 commonLabels:
   app.kubernetes.io/name: beat
   app.kubernetes.io/component: celery-task-cron
-vars:
-- name: SQLPROXY_SERVICE_NAME
-  objref:
-    kind: Service
-    name: gcloud-sqlproxy
-    apiVersion: v1
-  fieldref:
-    fieldpath: metadata.name
