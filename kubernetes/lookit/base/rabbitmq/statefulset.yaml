@@ -49,10 +49,6 @@ spec:
             #replace the default password that is generated
             sed -i "/CHANGEME/cdefault_pass=${RABBITMQ_PASSWORD//\\/\\\\}" /opt/bitnami/rabbitmq/etc/rabbitmq/rabbitmq.conf
             exec rabbitmq-server
-        resources:
-          requests:
-            cpu: 100m
-            memory: 256Mi
         volumeMounts:
           - name: config-volume
             mountPath: /opt/bitnami/rabbitmq/conf
