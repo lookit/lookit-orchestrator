@@ -2,11 +2,9 @@
   path: /spec/template/spec/initContainers/-
   value:
     name: wait-init-gcloud-sqlproxy
-    image: bitnami/kubectl:latest
-    args: [
-      "rollout",
-      "status",
-      "deployment",
-      "-w",
-      "$(GCLOUD_SQLPROXY_DEPLOYMENT_NAME)"
-    ]
+    image: postgres:9.6
+    command:
+    - bash
+    args: 
+    - -c
+    - until pg_isready -h $(GCLOUD_SQLPROXY_SERVICE_NAME); do echo waiting for sqlproxy; sleep 5; done
