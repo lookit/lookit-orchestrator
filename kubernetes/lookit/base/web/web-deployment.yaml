@@ -38,10 +38,6 @@ spec:
           tcpSocket:
             port: 5000
           timeoutSeconds: 1
-        resources:
-          limits:
-            cpu: "1"
-            memory: 1Gi
         volumeMounts:
         - mountPath: /etc/uwsgi/uwsgi.ini
           name: config-volume
