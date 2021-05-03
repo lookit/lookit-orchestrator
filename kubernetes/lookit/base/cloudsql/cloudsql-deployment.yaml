@@ -23,10 +23,6 @@ spec:
                   "-instances=$(CLOUDSQL_INSTANCE_CONNECTION_NAME)=tcp:0.0.0.0:5432",
                   "-credential_file=/secrets/cloudsql/cloudsql-client-creds.json"]
         image: gcr.io/cloudsql-docker/gce-proxy:latest
-        resources:
-          limits:
-            cpu: 150m
-            memory: 150Mi
         name: cloud-sqlproxy
         ports:
         - containerPort: 5432
