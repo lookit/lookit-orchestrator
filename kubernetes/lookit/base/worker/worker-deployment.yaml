@@ -35,10 +35,6 @@ spec:
         - -Q
         - email
         env: []
-        resources:
-          limits:
-            cpu: "2"
-            memory: 1Gi
         volumeMounts:
         - mountPath: /etc/googleAppCreds.json
           name: secret-volume

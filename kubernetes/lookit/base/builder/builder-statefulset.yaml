@@ -61,10 +61,6 @@ spec:
           value: "1"
         - name: DOCKER_CERT_PATH
           value: "/certs/client"
-        resources:
-          limits:
-            cpu: "2"
-            memory: 4Gi
         volumeMounts:
         - name: checkouts-volume
           mountPath: /code/ember_build/checkouts
