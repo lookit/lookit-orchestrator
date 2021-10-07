@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: compilemessages
+  annotations:
+    lookit-env-vars: "injected"
+    wait-for-gcloud-sqlproxy: "true"
+spec:
+  activeDeadlineSeconds: 900
+  backoffLimit: 6
+  template:
+    metadata:
+      name: compilemessages
+    spec:
+      initContainers: []
+      containers:
+      - name: compilemessages
+        image: lookit
+        imagePullPolicy: IfNotPresent
+        command:
+        - python
+        - manage.py
+        - compilemessages
+        env: []
+        volumeMounts:
+        - mountPath: /etc/googleAppCreds.json
+          name: secret-volume
+          readOnly: true
+          subPath: googleAppCreds.json
+      restartPolicy: OnFailure
+      volumes:
+      - name: config-volume
+        configMap:
+          defaultMode: 420
+          name: lookit-configmap
+      - name: secret-volume
+        secret:
+          defaultMode: 420
+          secretName: lookit-secrets
+      - name: cloudsql-instance-credentials
+        secret:
+          defaultMode: 420
+          secretName: cloudsql-instance-credentials

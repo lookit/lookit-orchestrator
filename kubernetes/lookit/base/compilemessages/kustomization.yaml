@@ -1,0 +1,5 @@
+resources:
+  - compilemessages-job.yaml
+commonLabels:
+  app.kubernetes.io/name: compilemessages
+  app.kubernetes.io/component: compile-translation-messages
