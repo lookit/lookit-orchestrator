@@ -7,7 +7,6 @@ resources:
 - builder
 - collectstatic
 - migration
-- compilemessages
 - web
 - worker
 - google-cloud-storage
