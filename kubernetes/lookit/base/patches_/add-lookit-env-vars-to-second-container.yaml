@@ -454,3 +454,13 @@
       secretKeyRef:
         key: SENTRY_DSN_JS
         name: lookit-secrets
+
+- op: add
+  path: /spec/template/spec/containers/1/env/-
+  value:
+    name: GOOGLE_TAG_MANAGER_ID
+    valueFrom:
+      secretKeyRef:
+        key: GOOGLE_TAG_MANAGER_ID
+        name: lookit-secrets
+        
