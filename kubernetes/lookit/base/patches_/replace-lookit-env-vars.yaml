@@ -204,25 +204,25 @@
         secretKeyRef:
           key: PIPE_WEBHOOK_KEY
           name: lookit-secrets
-    - name: S3_REGION
+    - name: AWS_RECORDING_REGION
       valueFrom:
         secretKeyRef:
-          key: S3_REGION
+          key: AWS_RECORDING_REGION
           name: lookit-secrets
-    - name: S3_ACCESS_KEY_ID
+    - name: AWS_RECORDING_ACCESS_KEY_ID
       valueFrom:
         secretKeyRef:
-          key: S3_ACCESS_KEY_ID
+          key: AWS_RECORDING_ACCESS_KEY_ID
           name: lookit-secrets
-    - name: S3_SECRET_ACCESS_KEY
+    - name: AWS_RECORDING_SECRET_ACCESS_KEY
       valueFrom:
         secretKeyRef:
-          key: S3_SECRET_ACCESS_KEY
+          key: AWS_RECORDING_SECRET_ACCESS_KEY
           name: lookit-secrets
-    - name: S3_BUCKET
+    - name: AWS_RECORDING_BUCKET
       valueFrom:
         secretKeyRef:
-          key: S3_BUCKET
+          key: AWS_RECORDING_BUCKET
           name: lookit-secrets
     - name: SECRET_KEY
       valueFrom:
