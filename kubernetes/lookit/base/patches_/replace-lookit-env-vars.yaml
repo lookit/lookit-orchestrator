@@ -244,3 +244,9 @@
         secretKeyRef:
           key: SENTRY_DSN_JS
           name: lookit-secrets
+    - name: GOOGLE_TAG_MANAGER_ID
+      valueFrom:
+        secretKeyRef:
+          key: GOOGLE_TAG_MANAGER_ID
+          name: lookit-secrets
+          
