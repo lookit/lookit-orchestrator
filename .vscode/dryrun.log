@@ -1,0 +1,7 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/beckygilbert/projects/lookit-orchestrator'
+bash -c "COMMIT_SHA=617db9598c8dd607e43fdd1172b8037c1d86abde SHORT_SHA=617db95 REPO_NAME=lookit-api BRANCH_NAME=master TAG_NAME=latest deploy.sh"
+bash -c "COMMIT_SHA=617db9598c8dd607e43fdd1172b8037c1d86abde SHORT_SHA=617db95 REPO_NAME=lookit-api BRANCH_NAME=develop TAG_NAME=latest deploy.sh"
+ 
+make: Leaving directory `/Users/beckygilbert/projects/lookit-orchestrator'
+ 

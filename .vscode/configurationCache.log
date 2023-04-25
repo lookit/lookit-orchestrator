@@ -1,0 +1,1 @@
+{"buildTargets":["cert-manager","clean","decrypt-prod","decrypt-staging","encrypt","encrypt-prod","encrypt-staging","ingress","make","test-cloud-build","test-deploy-script"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
