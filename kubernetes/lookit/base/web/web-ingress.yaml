@@ -19,7 +19,19 @@ spec:
         backend:
           serviceName: web
           servicePort: http
+  - host: $(SECONDARY_DOMAIN)
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web
+          servicePort: http
+      - path: /*
+        backend:
+          serviceName: web
+          servicePort: http
   tls:
   - hosts:
     - $(SITE_DOMAIN)
+    - $(SECONDARY_DOMAIN)
     secretName: lookit-cert

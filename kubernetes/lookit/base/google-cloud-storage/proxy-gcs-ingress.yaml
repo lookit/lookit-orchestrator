@@ -18,7 +18,15 @@ spec:
             backend:
               serviceName: google-storage
               servicePort: 443
+    - host: $(SECONDARY_DOMAIN)
+      http:
+        paths:
+          - path: /(media|static)(/|$)(.*)
+            backend:
+              serviceName: google-storage
+              servicePort: 443
   tls:
     - hosts:
       - $(SITE_DOMAIN)
+      - $(SECONDARY_DOMAIN)
       secretName: lookit-cert
