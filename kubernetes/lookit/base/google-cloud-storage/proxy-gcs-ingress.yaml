@@ -22,19 +22,19 @@ spec:
                 name: google-storage
                 port: 
                   number: 443
-    # - host: $(SECONDARY_DOMAIN)
-    #   http:
-    #     paths:
-    #       - path: /(media|static)(/|$)(.*)
-    #         pathType: Prefix
-    #         # path: /(media|static)/(.*)
-    #         backend:
-    #           service:
-    #             name: google-storage
-    #             port: 
-    #               number: 443
+    - host: $(SECONDARY_DOMAIN)
+      http:
+        paths:
+          - path: /(media|static)(/|$)(.*)
+            pathType: Prefix
+            # path: /(media|static)/(.*)
+            backend:
+              service:
+                name: google-storage
+                port: 
+                  number: 443
   tls:
     - hosts:
       - $(SITE_DOMAIN)
-      # - $(SECONDARY_DOMAIN)
+      - $(SECONDARY_DOMAIN)
       secretName: lookit-cert
