@@ -224,6 +224,15 @@
 - op: add
   path: /spec/template/spec/containers/0/env/-
   value:
+    name: SECONDARY_DOMAIN
+    valueFrom:
+      configMapKeyRef:
+        key: SECONDARY_DOMAIN
+        name: lookit-configmap        
+
+- op: add
+  path: /spec/template/spec/containers/0/env/-
+  value:
     name: STATIC_URL
     valueFrom:
       configMapKeyRef:

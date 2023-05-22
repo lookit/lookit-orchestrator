@@ -8,6 +8,8 @@ varReference:
 - kind: ConfigMap
   path: data/SITE_DOMAIN
 - kind: ConfigMap
+  path: data/SECONDARY_DOMAIN
+- kind: ConfigMap
   path: data/ENVIRONMENT
 - kind: ConfigMap
   path: data/CLUSTER_ISSUER
