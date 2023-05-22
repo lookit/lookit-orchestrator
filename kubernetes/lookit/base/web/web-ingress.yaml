@@ -26,25 +26,25 @@ spec:
             name: web
             port: 
               name: http
-  - host: $(SECONDARY_DOMAIN)
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web
-            port: 
-              name: http
-      - path: /*
-        pathType: Prefix
-        backend:
-          service:
-            name: web
-            port: 
-              name: http
+  # - host: $(SECONDARY_DOMAIN)
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: web
+  #           port: 
+  #             name: http
+  #     - path: /*
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: web
+  #           port: 
+  #             name: http
   tls:
   - hosts:
     - $(SITE_DOMAIN)
-    - $(SECONDARY_DOMAIN)
+    # - $(SECONDARY_DOMAIN)
     secretName: lookit-cert
