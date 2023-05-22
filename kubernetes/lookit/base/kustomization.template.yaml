@@ -58,6 +58,13 @@ vars:
     name: lookit-configmap
   fieldref:
     fieldpath: data.SITE_DOMAIN
+- name: SECONDARY_DOMAIN
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: lookit-configmap
+  fieldref:
+    fieldpath: data.SECONDARY_DOMAIN    
 - name: ENVIRONMENT
   objref:
     apiVersion: v1
