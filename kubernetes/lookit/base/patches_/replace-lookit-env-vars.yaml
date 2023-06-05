@@ -209,30 +209,6 @@
         secretKeyRef:
           key: PIPE_WEBHOOK_KEY
           name: lookit-secrets
-    - name: S3_REGION
-      valueFrom:
-        secretKeyRef:
-          key: S3_REGION
-          name: lookit-secrets
-          optional: true
-    - name: S3_ACCESS_KEY_ID
-      valueFrom:
-        secretKeyRef:
-          key: S3_ACCESS_KEY_ID
-          name: lookit-secrets
-          optional: true
-    - name: S3_SECRET_ACCESS_KEY
-      valueFrom:
-        secretKeyRef:
-          key: S3_SECRET_ACCESS_KEY
-          name: lookit-secrets
-          optional: true
-    - name: S3_BUCKET
-      valueFrom:
-        secretKeyRef:
-          key: S3_BUCKET
-          name: lookit-secrets
-          optional: true
     - name: SECRET_KEY
       valueFrom:
         secretKeyRef:
