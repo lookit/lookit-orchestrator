@@ -258,4 +258,10 @@
         secretKeyRef:
           key: GOOGLE_TAG_MANAGER_ID
           name: lookit-secrets
+    - name: AWS_LAMBDA_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          key: AWS_LAMBDA_SECRET_ACCESS_KEY
+          name: lookit-secrets
+          optional: true
           
