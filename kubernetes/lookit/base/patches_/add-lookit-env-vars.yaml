@@ -477,3 +477,12 @@
         key: GOOGLE_TAG_MANAGER_ID
         name: lookit-secrets
         
+- op: add
+  path: /spec/template/spec/containers/0/env/-
+  value:
+    name: AWS_LAMBDA_SECRET_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        key: AWS_LAMBDA_SECRET_ACCESS_KEY
+        name: lookit-secrets
+        optional: true
