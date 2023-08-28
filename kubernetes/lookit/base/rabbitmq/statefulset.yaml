@@ -69,28 +69,28 @@ spec:
           containerPort: 25672
         - name: stats
           containerPort: 15672
-        livenessProbe:
-          exec:
-            command:
-              - sh
-              - -c
-              - rabbitmq-api-check "http://admin:$RABBITMQ_PASSWORD@127.0.0.1:15672/api/healthchecks/node" '{"status":"ok"}'
-          initialDelaySeconds: 120
-          timeoutSeconds: 20
-          periodSeconds: 30
-          failureThreshold: 6
-          successThreshold: 1
-        readinessProbe:
-          exec:
-            command:
-              - sh
-              - -c
-              - rabbitmq-health-check "http://admin:$RABBITMQ_PASSWORD@127.0.0.1:15672/api/healthchecks/node" '{"status":"ok"}'
-          initialDelaySeconds: 10
-          timeoutSeconds: 20
-          periodSeconds: 30
-          failureThreshold: 3
-          successThreshold: 1
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #       - sh
+        #       - -c
+        #       - rabbitmq-api-check "http://admin:$RABBITMQ_PASSWORD@127.0.0.1:15672/api/healthchecks/node" '{"status":"ok"}'
+        #   initialDelaySeconds: 120
+        #   timeoutSeconds: 20
+        #   periodSeconds: 30
+        #   failureThreshold: 6
+        #   successThreshold: 1
+        # readinessProbe:
+        #   exec:
+        #     command:
+        #       - sh
+        #       - -c
+        #       - rabbitmq-health-check "http://admin:$RABBITMQ_PASSWORD@127.0.0.1:15672/api/healthchecks/node" '{"status":"ok"}'
+        #   initialDelaySeconds: 10
+        #   timeoutSeconds: 20
+        #   periodSeconds: 30
+        #   failureThreshold: 3
+        #   successThreshold: 1
         startupProbe:
           tcpSocket:
             port: 5672
@@ -137,47 +137,47 @@ spec:
               secretKeyRef:
                 name: lookit-secrets
                 key: rabbitmq-password
-      - name: metrics
-        image: docker.io/bitnami/rabbitmq-exporter:0.29.0-debian-10-r28
-        imagePullPolicy: "IfNotPresent"
-        env:
-        - name: RABBIT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: lookit-secrets
-              key: rabbitmq-password
-        - name: RABBIT_URL
-          value: "http://localhost:15672"
-        - name: RABBIT_USER
-          value: admin
-        - name: PUBLISH_PORT
-          value: "9419"
+      # - name: metrics
+      #   image: docker.io/bitnami/rabbitmq-exporter:0.29.0-debian-10-r28
+      #   imagePullPolicy: "IfNotPresent"
+      #   env:
+      #   - name: RABBIT_PASSWORD
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: lookit-secrets
+      #         key: rabbitmq-password
+      #   - name: RABBIT_URL
+      #     value: "http://localhost:15672"
+      #   - name: RABBIT_USER
+      #     value: admin
+      #   - name: PUBLISH_PORT
+      #     value: "9419"
         
-        - name: RABBIT_CAPABILITIES
-          value: "bert,no_sort"
-        ports:
-        - name: metrics
-          containerPort: 9419
-        livenessProbe:
-          httpGet:
-            path: /metrics
-            port: metrics
-          initialDelaySeconds: 15
-          timeoutSeconds: 5
-          periodSeconds: 30
-          failureThreshold: 6
-          successThreshold: 1
-        readinessProbe:
-          httpGet:
-            path: /metrics
-            port: metrics
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
-          periodSeconds: 30
-          failureThreshold: 3
-          successThreshold: 1
-        resources:
-          {}
+      #   - name: RABBIT_CAPABILITIES
+      #     value: "bert,no_sort"
+      #   ports:
+      #   - name: metrics
+      #     containerPort: 9419
+      #   livenessProbe:
+      #     httpGet:
+      #       path: /metrics
+      #       port: metrics
+      #     initialDelaySeconds: 15
+      #     timeoutSeconds: 5
+      #     periodSeconds: 30
+      #     failureThreshold: 6
+      #     successThreshold: 1
+      #   readinessProbe:
+      #     httpGet:
+      #       path: /metrics
+      #       port: metrics
+      #     initialDelaySeconds: 5
+      #     timeoutSeconds: 5
+      #     periodSeconds: 30
+      #     failureThreshold: 3
+      #     successThreshold: 1
+      #   resources:
+      #     {}
       securityContext:
         fsGroup: 1001
         runAsUser: 1001
