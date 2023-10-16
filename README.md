@@ -130,10 +130,6 @@ or develop branches will automatically trigger a build with the correct tag, com
 
 ## Endnotes
 
-### Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
 ### Authors
 
 * **Rico Rodriguez** ([Datamance](https://github.com/Datamance))
