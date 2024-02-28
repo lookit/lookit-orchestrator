@@ -1,7 +1,8 @@
 resources:
   - web-deployment.yaml
   - web-service.yaml
-  - web-ingress.yaml
+  - web-primary-ingress.yaml
+  - web-secondary-ingress.yaml
 commonLabels:
   app.kubernetes.io/name: web
   app.kubernetes.io/component: web-application
