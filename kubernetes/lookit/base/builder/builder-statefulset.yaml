@@ -33,6 +33,8 @@ spec:
             mountPath: /code/ember_build/checkouts
           - name: deployments-volume
             mountPath: /code/ember_build/deployments
+          - name: scratch
+            mountPath: /code/scratch
       - name: builder
         image: lookit
         imagePullPolicy: IfNotPresent
@@ -106,3 +108,12 @@ spec:
           storage: 10Gi
       storageClassName: ssd
       volumeMode: Filesystem
+  - metadata:
+      name: scratch
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 100Gi
+      storageClassName: standard
