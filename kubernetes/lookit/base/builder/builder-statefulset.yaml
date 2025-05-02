@@ -52,7 +52,7 @@ spec:
         - -n
         - worker.%h
         - --without-gossip
-        - --maxtasksperchild
+        - --max-tasks-per-child
         - "1"
         - -Q
         - builds,cleanup
