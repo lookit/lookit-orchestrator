@@ -6,6 +6,7 @@ metadata:
     lookit-env-vars: "second-container"
     wait-for-gcloud-sqlproxy: "true"
     wait-for-rabbitmq: "true"
+    gke-gcsfuse/volumes: "true"
 spec:
   selector:
     matchLabels: {}
@@ -112,8 +113,8 @@ spec:
       name: scratch
     spec:
       accessModes:
-        - ReadWriteOnce
+      - ReadWriteMany
       resources:
         requests:
           storage: 100Gi
-      storageClassName: standard
+      storageClassName: gcs-storage-class

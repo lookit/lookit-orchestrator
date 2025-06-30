@@ -6,6 +6,7 @@ metadata:
     lookit-env-vars: "injected"
     wait-for-gcloud-sqlproxy: "true"
     wait-for-rabbitmq: "true"
+    gke-gcsfuse/volumes: "true"
 spec:
   selector:
     matchLabels: {}
@@ -40,6 +41,8 @@ spec:
           name: secret-volume
           readOnly: true
           subPath: googleAppCreds.json
+        - mountPath: /code/scratch
+          name: scratch
       volumes:
       - name: config-volume
         configMap:
@@ -53,3 +56,6 @@ spec:
         secret:
           defaultMode: 420
           secretName: cloudsql-instance-credentials
+      - name: scratch
+        persistentVolumeClaim:
+          claimName: gcs-fuse-csi-static-pvc
