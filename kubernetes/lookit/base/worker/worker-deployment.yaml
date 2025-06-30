@@ -6,11 +6,13 @@ metadata:
     lookit-env-vars: "injected"
     wait-for-gcloud-sqlproxy: "true"
     wait-for-rabbitmq: "true"
-    gke-gcsfuse/volumes: "true"
 spec:
   selector:
     matchLabels: {}
   template:
+    metadata:
+      annotations:
+        gke-gcsfuse/volumes: "true"
     spec:
       initContainers: []
       containers:
