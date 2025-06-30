@@ -7,7 +7,7 @@ spec:
   - ReadWriteMany
   capacity:
     storage: 100Gi
-  storageClassName: gcs-storage-class
+  storageClassName: standard
   mountOptions:
     - implicit-dirs
     - file-cache:enable-parallel-downloads:true
