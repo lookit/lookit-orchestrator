@@ -53,6 +53,12 @@ envsubst \
   < kubernetes/lookit/transformers/dynamic-labels.template.yaml \
   > kubernetes/lookit/transformers/dynamic-labels.yaml
 
+# 4a) Run envsubst on the patch for GCS FUSE mount so we can get the right bucket name
+# because Kustomize is bad at env var replacement and they no longer support that feature anyway.
+envsubst \
+  < kubernetes/lookit/base/patches_/add-gcs-fuse-scratch.template.yaml \
+  > kubernetes/lookit/base/patches_/add-gcs-fuse-scratch.yaml
+
 # 5) Generate the actual configs.
 kustomize build --reorder none -o "$MANIFESTS_TARGET" "${TARGET_KUSTOMIZATIONS}"
 
