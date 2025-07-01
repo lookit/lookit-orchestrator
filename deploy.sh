@@ -59,7 +59,7 @@ declare -A BRANCH_ENV_MAP=(
   [master]="production"
   [develop]="staging"
 )
-export ENVIROMENT=${BRANCH_ENV_MAP[$BRANCH_NAME]}
+export ENVIRONMENT=${BRANCH_ENV_MAP[$BRANCH_NAME]}
 envsubst \
   < kubernetes/lookit/base/patches_/add-gcs-fuse-scratch.template.yaml \
   > kubernetes/lookit/base/patches_/add-gcs-fuse-scratch.yaml
