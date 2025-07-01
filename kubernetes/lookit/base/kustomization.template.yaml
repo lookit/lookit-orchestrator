@@ -127,3 +127,6 @@ patches:
 - path: patches_/add-rollout-waiter-serviceaccount.yaml
   target:
     annotationSelector: "wait-for-gcloud-sqlproxy in (true, True, TRUE, 1, yes, Yes, YES)"
+- path: patches_/add-gcs-fuse-scratch.yaml
+  target:
+    annotationSelector:  "mount-gcs-scratch in (true, True, TRUE, 1, yes, Yes, YES)"

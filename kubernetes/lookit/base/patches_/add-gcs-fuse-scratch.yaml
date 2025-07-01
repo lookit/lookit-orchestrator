@@ -1,0 +1,10 @@
+- op: add
+  path: /spec/template/spec/volumes
+  value:
+    name: scratch
+    csi:
+      driver: gcsfuse.csi.storage.gke.io
+      volumeAttributes:
+        bucketName: lookit-$(ENVIRONMENT)-private
+        mountOptions: "implicit-dirs,file-cache:enable-parallel-downloads:true,file-cache:max-size-mb:-1"
+        fileCacheCapacity: "-1"

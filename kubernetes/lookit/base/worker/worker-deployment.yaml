@@ -6,6 +6,7 @@ metadata:
     lookit-env-vars: "injected"
     wait-for-gcloud-sqlproxy: "true"
     wait-for-rabbitmq: "true"
+    mount-gcs-scratch: "true"
 spec:
   selector:
     matchLabels: {}
@@ -58,10 +59,3 @@ spec:
         secret:
           defaultMode: 420
           secretName: cloudsql-instance-credentials
-      - name: scratch
-        csi:
-          driver: gcsfuse.csi.storage.gke.io
-          volumeAttributes:
-            bucketName: lookit-$(ENVIRONMENT)-private
-            mountOptions: "implicit-dirs,file-cache:enable-parallel-downloads:true,file-cache:max-size-mb:-1"
-            fileCacheCapacity: "-1"
