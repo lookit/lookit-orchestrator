@@ -1,5 +1,5 @@
 - op: add
-  path: /spec/template/spec/volumes
+  path: /spec/template/spec/volumes/-
   value:
     name: scratch
     csi:
