@@ -59,5 +59,9 @@ spec:
           defaultMode: 420
           secretName: cloudsql-instance-credentials
       - name: scratch
-        persistentVolumeClaim:
-          claimName: gcs-fuse-csi-static-pvc
+        csi:
+          driver: gcsfuse.csi.storage.gke.io
+          volumeAttributes:
+            bucketName: lookit-$(ENVIRONMENT)-private
+            mountOptions: "implicit-dirs,file-cache:enable-parallel-downloads:true,file-cache:max-size-mb:-1"
+            fileCacheCapacity: "-1"

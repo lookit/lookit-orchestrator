@@ -6,13 +6,15 @@ metadata:
     lookit-env-vars: "second-container"
     wait-for-gcloud-sqlproxy: "true"
     wait-for-rabbitmq: "true"
-    gke-gcsfuse/volumes: "true"
 spec:
   selector:
     matchLabels: {}
   podManagementPolicy: OrderedReady
   serviceName: builder
   template:
+    metadata:
+      annotations:
+        gke-gcsfuse/volumes: "true"
     spec:
       initContainers: []
       containers:
@@ -94,6 +96,13 @@ spec:
         secret:
           defaultMode: 420
           secretName: cloudsql-instance-credentials
+      - name: scratch
+        csi:
+          driver: gcsfuse.csi.storage.gke.io
+          volumeAttributes:
+            bucketName: lookit-$(ENVIRONMENT)-private
+            mountOptions: "implicit-dirs,file-cache:enable-parallel-downloads:true,file-cache:max-size-mb:-1"
+            fileCacheCapacity: "-1"
   updateStrategy:
     rollingUpdate:
       partition: 0
@@ -109,12 +118,3 @@ spec:
           storage: 10Gi
       storageClassName: ssd
       volumeMode: Filesystem
-  - metadata:
-      name: scratch
-    spec:
-      accessModes:
-      - ReadWriteMany
-      resources:
-        requests:
-          storage: 100Gi
-      storageClassName: gcs-storage-class
