@@ -78,6 +78,8 @@ spec:
           subPath: googleAppCreds.json
         - name: docker-client-certs
           mountPath: /certs/client
+        - name: scratch
+          mountPath: /code/scratch
       volumes:
       - name: checkouts-volume
         emptyDir: {}
