@@ -6,10 +6,14 @@ metadata:
     lookit-env-vars: "injected"
     wait-for-gcloud-sqlproxy: "true"
     wait-for-rabbitmq: "true"
+    mount-gcs-scratch: "true"
 spec:
   selector:
     matchLabels: {}
   template:
+    metadata:
+      annotations:
+        gke-gcsfuse/volumes: "true"
     spec:
       initContainers: []
       containers:
@@ -40,6 +44,8 @@ spec:
           name: secret-volume
           readOnly: true
           subPath: googleAppCreds.json
+        - mountPath: /code/scratch
+          name: scratch
       volumes:
       - name: config-volume
         configMap:

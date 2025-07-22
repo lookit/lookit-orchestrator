@@ -6,12 +6,16 @@ metadata:
     lookit-env-vars: "second-container"
     wait-for-gcloud-sqlproxy: "true"
     wait-for-rabbitmq: "true"
+    mount-gcs-scratch: "true"
 spec:
   selector:
     matchLabels: {}
   podManagementPolicy: OrderedReady
   serviceName: builder
   template:
+    metadata:
+      annotations:
+        gke-gcsfuse/volumes: "true"
     spec:
       initContainers: []
       containers:
@@ -74,6 +78,8 @@ spec:
           subPath: googleAppCreds.json
         - name: docker-client-certs
           mountPath: /certs/client
+        - name: scratch
+          mountPath: /code/scratch
       volumes:
       - name: checkouts-volume
         emptyDir: {}
@@ -108,12 +114,3 @@ spec:
           storage: 10Gi
       storageClassName: ssd
       volumeMode: Filesystem
-  - metadata:
-      name: scratch
-    spec:
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 100Gi
-      storageClassName: standard
