@@ -28,7 +28,7 @@ spec:
           mountPath: "/opt/bitnami/rabbitmq/var/lib/rabbitmq"
       containers:
       - name: rabbitmq
-        image: docker.io/bitnami/rabbitmq:3.8.2-debian-10-r30
+        image: docker.io/bitnamilegacy/rabbitmq:3.8.2-r30
         imagePullPolicy: "IfNotPresent"
         command:
          - bash
