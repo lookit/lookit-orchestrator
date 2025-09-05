@@ -68,6 +68,8 @@ spec:
         - name: DOCKER_CERT_PATH
           value: "/certs/client"
         resources:
+          request:
+            memory: 4Gi
           limits:
             memory: 8Gi
         volumeMounts:
