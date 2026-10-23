@@ -517,3 +517,14 @@
       secretKeyRef:
         key: AWS_LAMBDA_SECRET_ACCESS_KEY
         name: lookit-secrets
+
+# Optional, so environments that don't set it get lookit-api's default (false).
+- op: add
+  path: /spec/template/spec/containers/0/env/-
+  value:
+    name: BLOCK_RULES_REPORT_ONLY
+    valueFrom:
+      configMapKeyRef:
+        key: BLOCK_RULES_REPORT_ONLY
+        name: lookit-configmap
+        optional: true
